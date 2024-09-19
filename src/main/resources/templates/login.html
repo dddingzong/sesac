@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/css/login.css">
+  <title>Login</title>
+</head>
+  <body>
+
+  <div class="form signin">
+    <div class="form-header">
+      <div class="show-signin">로그인</div>
+      <div class="show-blank"></div>
+      <div class="show-signup">회원가입</div>
+    </div>
+    <div class="arrow"></div>
+    <div class="form-elements">
+      <div class="form-element">
+        <input type="text" name="name" id="name" placeholder="이름">
+      </div>
+      <div class="form-element">
+        <input type="text" name ="loginId" id ="loginId" placeholder="아이디">
+      </div>
+      <div class="form-element">
+        <input type="password" name="loginPassword" id ="loginPassword" placeholder="비밀번호">
+      </div>
+      <div class="form-element">
+        <input type="password" name="loginPassword_confirm" id ="loginPassword_confirm" placeholder="비밀번호 확인">
+      </div>
+      <div class="form-element">
+        <form>
+          <select name="chooseRole" class="chooseRole" id="chooseRole">
+            <option value="none">제공 받을 정보 선택</option>
+            <option value="care">복지 정보</option>
+            <option value="job">취업 정보</option>
+            <option value="all">모두</option>
+          </select>
+        </form>
+      </div>
+      <div class="form-element">
+        <button id="submit-btn">로그인</button>
+      </div>
+    </div>
+  </div>
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/login.js"></script>
+  <script src="/js/loginAjax.js"></script>
+
+</body>
+</html>
+
