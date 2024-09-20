@@ -19,18 +19,33 @@ $(document).ready(function() {
   });
 });
 
+
+// progress bar js
 $(document).ready(function() {
-  let progress = 0;
-  const interval = setInterval(() => {
-    if (progress >= 100) {
-      clearInterval(interval);
-    } else {
-      progress++;
-      $('#percentage').text(progress + '%');
-      const circumference = 2 * Math.PI * 60; // 반지름을 사용하여 원주 계산
-      const offset = circumference - (progress / 100) * circumference;
-      $('#progressCircle').css('stroke-dasharray', `${circumference} ${circumference}`);
-      $('#progressCircle').css('stroke-dashoffset', offset);
+  const progressText = document.querySelector('.progress-text');
+  const circle = document.getElementById('circleProgress');
+  const radius = 40; // Circle radius
+  const circumference = 2 * Math.PI * radius;
+
+  // Function to create circular progress
+  function createCircleProgress(percent) {
+    const offset = circumference - (percent / 100 * circumference);
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = offset;
+  }
+
+  // Function to update progress based on progress-text
+  function updateProgressFromText() {
+    const progressValue = parseFloat(progressText.textContent);
+    if (!isNaN(progressValue)) {
+      createCircleProgress(progressValue);
     }
-  }, 100); // 100ms 간격으로 증가
+  }
+
+  // 초기 원형 진행 표시 설정
+  createCircleProgress(0); // 초기 값 설정
+
+  // progress-text가 변경될 때마다 업데이트
+  const observer = new MutationObserver(updateProgressFromText);
+  observer.observe(progressText, { childList: true, characterData: true, subtree: true });
 });

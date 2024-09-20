@@ -91,26 +91,28 @@
             <div class="row"> <!-- slider 메인 화면 -->
               <div class="col-md-4"> <!-- 중앙 왼쪽 화면 -->
                 <div class="detail-box">
+                  <h4 class="progress-level">성장 단계</h4>
                   <div class ="progress-box">
                     <!-- progress bar -->
-                    <div class="circle-container">
-                      <svg width="150" height="150" class="circle">
-                        <circle cx="75" cy="75" r="60" stroke="#e8faf7" stroke-width="10" fill="none"></circle>
-                        <circle cx="75" cy="75" r="60" stroke="#00c6a9" stroke-width="10" fill="none" stroke-dasharray="0 376" id="progressCircle"></circle>
-                        <image x="50%" y="50%" width="60%" height="60%" xlink:href="images/logo.png" transform="translate(-50%,-50%)" />
-                      </svg>
-                      <div class="percentage" id="percentage">0%</div>
+                    <div class="progress-content">
+                      <img src="images/logo.png" alt="Logo" class="progress-logo">
+                      <div class="circle-progress">
+                        <svg width="100" height="100">
+                          <circle id="circleProgress" cx="50" cy="50" r="40" fill="transparent" stroke="#00c6a9" stroke-width="10"></circle>
+                        </svg>
+                        <div class="progress-text">30%</div> <!-- Change this value dynamically as needed -->
+                      </div>
                     </div>
                     <!-- progress bar 끝 -->
-                    <br>
-                    <h4>
-                      당신의 등급은
-                        <span>
-                          (새싹) <!-- 등급에 맞는 이름 -->
-                        </span>
-                      입니다.
-                    </h4>
                   </div>
+                  <br>
+                  <h4>
+                    당신의 등급은
+                    <span>
+                          (새싹) <!-- 등급에 맞는 이름 -->
+                    </span>
+                    입니다.
+                  </h4>
                 </div>
               </div>
               <div class="col-md-8"> <!-- 중앙 오른쪽 화면 -->
