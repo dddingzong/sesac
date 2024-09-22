@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
   <!-- Basic -->
@@ -91,7 +91,7 @@
             <div class="row"> <!-- slider 메인 화면 -->
               <div class="col-md-4"> <!-- 중앙 왼쪽 화면 -->
                 <div class="detail-box">
-                  <h4 class="progress-level">성장 단계</h4>
+                  <h4 class="progress-level"><span th:text="${name}"></span>님의 성장 단계</h4>
                   <div class ="progress-box">
                     <!-- progress bar -->
                     <div class="progress-content">
@@ -148,8 +148,6 @@
             최근 정보통
           </h4>
 
-
-
         </form>
       </div>
 
@@ -195,8 +193,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
 <!-- owl slider -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- custom js -->
-<script src="js/custom.js"></script>
 <script src="js/main.js"></script>
 
 

@@ -80,11 +80,14 @@ body {
 
 
 /* 클릭시 이동 */
+.form.signin .form-elements > div:nth-child(1),
 .form.signin .form-elements > div:nth-child(4),
 .form.signin .form-elements > div:nth-child(5){
   height:0px;
   opacity:0;
 }
+
+.form.reset .form-elements > div:nth-child(1),
 .form.reset .form-elements > div:nth-child(4),
 .form.reset .form-elements > div:nth-child(5){
   height:0px;

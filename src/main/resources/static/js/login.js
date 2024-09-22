@@ -13,3 +13,9 @@ document.getElementsByClassName("show-signup")[0].addEventListener("click",funct
   form.classList.add("signup");
   document.getElementById("submit-btn").innerText = "회원가입";
 });
+
+document.getElementById('submit-btn').addEventListener('click', function(event) {
+    if (this.textContent !== '로그인') {
+        event.preventDefault(); // submit 이벤트 차단
+    }
+});

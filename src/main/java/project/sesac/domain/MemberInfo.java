@@ -3,11 +3,13 @@ package project.sesac.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@ToString
 public class MemberInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,12 +24,10 @@ public class MemberInfo {
     @ColumnDefault("0")
     private int point; // point 총합
 
-    private int chooseRole; // 0이면 정책만 1이면 둘 다
+    private int chooseRole; // 0이면 복지만 1이면 취업만 2이면 모두
 
-    public MemberInfo(String name, int exp, int point, int chooseRole) {
+    public MemberInfo(String name, int chooseRole) {
         this.name = name;
-        this.exp = exp;
-        this.point = point;
         this.chooseRole = chooseRole;
     }
 }
