@@ -24,17 +24,15 @@ $(document).ready(function() {
 $(document).ready(function() {
   const progressText = document.querySelector('.progress-text');
   const circle = document.getElementById('circleProgress');
-  const radius = 40; // Circle radius
+  const radius = 40; // 원의 반지름
   const circumference = 2 * Math.PI * radius;
 
-  // Function to create circular progress
   function createCircleProgress(percent) {
     const offset = circumference - (percent / 100 * circumference);
     circle.style.strokeDasharray = `${circumference} ${circumference}`;
     circle.style.strokeDashoffset = offset;
   }
 
-  // Function to update progress based on progress-text
   function updateProgressFromText() {
     const progressValue = parseFloat(progressText.textContent);
     if (!isNaN(progressValue)) {
@@ -42,10 +40,10 @@ $(document).ready(function() {
     }
   }
 
-  // 초기 원형 진행 표시 설정
-  createCircleProgress(0); // 초기 값 설정
+  createCircleProgress(0); // 초기값 설정
 
-  // progress-text가 변경될 때마다 업데이트
   const observer = new MutationObserver(updateProgressFromText);
   observer.observe(progressText, { childList: true, characterData: true, subtree: true });
+
+  updateProgressFromText();
 });

@@ -646,4 +646,15 @@ a:focus {
   margin-right: 10px; /* 원하는 만큼 왼쪽으로 이동 */
 }
 
+#circleProgress {
+  stroke: #4caf50; /* 진행 색상 */
+  stroke-width: 10; /* 진행 너비 */
+  fill: none; /* 배경 없음 */
+}
+
+#circleBorder {
+  stroke: #ccc; /* 테두리 색상 */
+  stroke-width: 10; /* 테두리 너비 */
+  fill: none; /* 배경 없음 */
+}
 
