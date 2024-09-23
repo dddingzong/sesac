@@ -44,6 +44,16 @@
       </div>
     </form>
   </div>
+
+
+  <script th:inline="javascript">
+    // error 메시지 가져오기
+    var errorMessage = /*[[${error}]]*/ ''; // Model에서 에러 메시지 가져오기
+    if (errorMessage) {
+      alert(errorMessage); // 에러 메시지 알림창으로 표시
+    }
+  </script>
+
   <script src="/js/jquery-3.4.1.min.js"></script>
   <script src="/js/login.js"></script>
   <script src="/js/loginAjax.js"></script>

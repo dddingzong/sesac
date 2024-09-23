@@ -14,10 +14,10 @@ public class MemberInfoDto {
 
     private String loginId;
 
-    private String loginPassWord;
+    private String loginPassword;
 
-    public MemberInfoDto(String loginId, String loginPassWord) {
+    public MemberInfoDto(String loginId, String loginPassword) {
         this.loginId = loginId;
-        this.loginPassWord = loginPassWord;
+        this.loginPassword = loginPassword;
     }
 }

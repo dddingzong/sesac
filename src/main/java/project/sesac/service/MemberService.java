@@ -20,4 +20,10 @@ public class MemberService {
     public List<Member> findByLoginId(String loginId){
         return memberRepository.findByLoginId(loginId);
     }
+
+    // 아이디 중복 확인 메소드
+    public boolean isLoginIdDuplicated(String loginId) {
+        return !memberRepository.findByLoginId(loginId).isEmpty();
+    }
+
 }

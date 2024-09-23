@@ -8,7 +8,7 @@ var index = {
             if (buttonText === '회원가입') {
                 _this.signup();
             } else if (buttonText === '로그인') {
-                console.log('에러발생')
+//                console.log('에러발생')
 //                _this.signin();
             }
         });
@@ -31,32 +31,11 @@ var index = {
         }).done(function() {
             console.log('회원가입에 성공하였습니다.');
             window.location.href = '/';
-        }).fail(function (error) {
-            console.log('에러발생');
-            console.log(error);
+        }).fail(function (xhr) {
+            var errorMessage = xhr.responseText || '알 수 없는 오류가 발생했습니다.';
+            alert(errorMessage);
         });
     },
-
-//    signin : function () {
-//            var data = {
-//                loginId : $('#loginId').val(),
-//            };
-//
-//            $.ajax({
-//                type: 'POST',
-//                url: '/login/signin',
-//                contentType:'application/json; charset=utf-8',
-//                async: false,
-//                dataType:'json',
-//                data: JSON.stringify(data)
-//            }).done(function() {
-//                console.log('로그인에 성공하였습니다.');
-//                window.location.href = '/main';
-//            }).fail(function (error) {
-//                console.log('에러발생');
-//                console.log(error);
-//            });
-//        },
 };
 
 index.init();

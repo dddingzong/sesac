@@ -31,11 +31,17 @@ public class LoginController {
     //회원가입 시 데이터가 Controller 로 들어옴
     @ResponseBody
     @PostMapping(value = "/login/signup") // /login/signup 으로 POST 로 들어오면 로직 실행
-    public void add(@RequestBody MemberDto memberDto){
+    public ResponseEntity<String> add(@RequestBody MemberDto memberDto){
 
-        // 아이디 중복 확인 로직 구현
+        // 아이디 중복 확인
+        if (memberService.isLoginIdDuplicated(memberDto.getLoginId())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디가 이미 존재합니다.");
+        }
 
-        // 비밀번호 확인 로직 구현
+        // 비밀번호 확인 로직 (비밀번호와 확인 비밀번호 일치 여부)
+        if (!isPasswordConfirmed(memberDto.getLoginPassword(), memberDto.getLoginPassword_confirm())) {
+            return ResponseEntity.badRequest().body("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+        }
 
         // 둘 다 통과 했을시에는 dto 에서 실제 Entity 로 변환
         // 이후 Member, MemberInfo 에 테이블 추가
@@ -55,6 +61,7 @@ public class LoginController {
         memberInfoService.save(memberInfo);
 
         logger.info("**********회원가입 성공**********");
+        return ResponseEntity.ok("회원가입 성공");
     }
 
     // ChooseRole 의 값을 String -> int
@@ -68,6 +75,11 @@ public class LoginController {
         } else {
             return -1;
         }
+    }
+
+    // 비밀번호와 비밀번호 확인 비교
+    private boolean isPasswordConfirmed(String password, String passwordConfirm) {
+        return password.equals(passwordConfirm);
     }
 
 }
