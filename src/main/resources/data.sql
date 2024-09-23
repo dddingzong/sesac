@@ -1,8 +1,10 @@
 INSERT INTO Member (main_id,login_id,login_password) VALUES (1,'chung','1234');
-INSERT INTO Member (main_id,login_id,login_password) VALUES (2,'yoon','0101');
+INSERT INTO Member (main_id,login_id,login_password) VALUES (2,'ddding','1234');
+INSERT INTO Member (main_id,login_id,login_password) VALUES (3,'yoon','0101');
 
-INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (1,'정종인',20,30,2);
-INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (2,'윤신헤',40,50,1);
+INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (1,'정종인',20,5,0);
+INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (2,'정종인',250,15,1);
+INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (3,'윤신헤',1600,25,2);
 
 insert into mission (id, content, content_role) values (1,'방 청소하기',0);
 insert into mission (id, content, content_role) values (2,'밥 세끼 챙겨먹기',0);

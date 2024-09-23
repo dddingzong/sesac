@@ -14,6 +14,10 @@ import project.sesac.service.MemberService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import project.sesac.service.MissionService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //@RestController = @Controller + @ResponseBody JSON 같은 데이터 전달
 @Controller //View 전달
@@ -23,6 +27,7 @@ public class MainController {
 
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
+    private final MissionService missionService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/main")
@@ -48,15 +53,20 @@ public class MainController {
         int restExp = restExp(exp); // 1%~100% 사이
         model.addAttribute("level",level);
         model.addAttribute("restExp",restExp);
-        // 일일 미션 point 사용
 
+        // 일일 미션 point 사용
         int point = memberInfo.getPoint();
 
-        // 상태는 총 세가지 0: 기본미션 두개, 1: 기본미션 한개 랜덤하나, 2: 랜덤하나 야외미션 하나
+        // 상태는 총 세가지 0: 기본미션 두개, 1: 기본미션 한개 랜덤하나, 2: 만남미션 한개 기본, 야외 중 한개
+        // default:0, 기본미션, 야외미션 성공시 +1, 만남미션 성공시 +5
+        // 최종 포인트 10 이상이면 야외미션 추가 (0->1), 20 이상이면 만남 미션 추가 (1->2)
 
+        List<String> missionList = choosemission(point);
+        String mission1 = missionList.get(0);
+        String mission2 = missionList.get(1);
 
-        Mission mission1;
-        Mission mission2;
+        model.addAttribute("mission1",mission1);
+        model.addAttribute("mission2",mission2);
 
         // todayInformation database 에서 가져오는 식
 
@@ -118,6 +128,31 @@ public class MainController {
             return 100;
         } else {
             return 0;
+        }
+    }
+
+    private List<String> defaultmission() {
+        return missionService.defaultmission();
+    }
+
+    private List<String> outsidemission() {
+        return missionService.outsidemission();
+    }
+
+    private List<String> meetmission() {
+        return missionService.meetmission();
+    }
+
+    private List<String> choosemission(int point){
+
+        if (point < 10) {
+            return defaultmission();
+        }else if (point >= 10 && point < 20){
+            return outsidemission();
+        }else if (point >= 20){
+            return meetmission();
+        } else {
+            return null;
         }
     }
 

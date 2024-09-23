@@ -325,6 +325,14 @@ a:focus {
     background-color: #e8faf7;
     border: 3px solid #00c6a9;
     border-radius: 20px;
+    display: flex; /* flexbox 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    padding: 10px; /* 내부 여백 추가 */
+}
+
+.slider_section .mission-box h5 {
+    margin-left: 10px; /* 오른쪽으로 이동할 여백 추가 */
+    font-weight: bold; /* 텍스트 볼드체 */
 }
 
 .slider_section .daily-mission-box {
