@@ -52,6 +52,8 @@ public class MainController {
         String level  = changeExpToLevel(exp);
         int restExp = restExp(exp); // 1%~100% 사이
         model.addAttribute("level",level);
+        String picture = levelToPicture(level);
+        model.addAttribute("picture", "/images/"+picture+".png");
         model.addAttribute("restExp",restExp);
 
         // 일일 미션 point 사용
@@ -75,6 +77,7 @@ public class MainController {
 
         return "main";
     }
+
 
     // 로그인 시 api 가 MainController 로 들어옴
     @PostMapping(value = "/login/signin")
@@ -112,6 +115,13 @@ public class MainController {
         return "redirect:/main";
     }
 
+    @GetMapping(value = "/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        logger.info("**********로그아웃 성공**********");
+        return "redirect:/";
+    }
+
 
     private String changeExpToLevel(int exp) {
         if (exp < 200){
@@ -126,6 +136,22 @@ public class MainController {
             return "열매";
         } else {
             return "미상";
+        }
+    }
+
+    private String levelToPicture(String level) {
+        if (level.equals("씨앗")){
+            return "seed";
+        } else if (level.equals("새싹")){
+            return "sprout";
+        } else if (level.equals("가지")){
+            return "branch";
+        } else if (level.equals("나무")){
+            return "tree";
+        } else if (level.equals("열매")){
+            return "apple";
+        } else {
+            return "sprout";
         }
     }
 
