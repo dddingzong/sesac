@@ -32,8 +32,44 @@ public class MemberInfo {
     @Column(columnDefinition = "boolean default false")
     boolean clearMission2;
 
+    @ColumnDefault("0")
+    private int pointRole;
+
     public MemberInfo(String name, int chooseRole) {
         this.name = name;
         this.chooseRole = chooseRole;
     }
+
+    public void mission1ToTrue(){
+        this.clearMission1 = true;
+    }
+
+    public void mission2ToTrue(){
+        this.clearMission2 = true;
+    }
+
+    public void mission1ToFalse(){
+        this.clearMission1 = false;
+    }
+
+    public void mission2ToFalse(){
+        this.clearMission2 = false;
+    }
+
+    public void plusPoint(int number){
+        this.point = this.point + number;
+    }
+
+    public void minusPoint(int number){
+        this.point = this.point - number;
+    }
+
+    public void changePointRole(int pointRole){
+        this.pointRole = pointRole;
+    }
+
+    public void plusExp(){
+        this.exp = this.exp + 40;
+    }
+
 }

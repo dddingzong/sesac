@@ -2,9 +2,9 @@ INSERT INTO Member (main_id,login_id,login_password) VALUES (11,'chung','1234');
 INSERT INTO Member (main_id,login_id,login_password) VALUES (12,'ddding','1234');
 INSERT INTO Member (main_id,login_id,login_password) VALUES (13,'yoon','0101');
 
-INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (11,'정종인',20,5,0);
-INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (12,'정종인',250,15,1);
-INSERT INTO Member_info (main_id, name, exp, point, choose_role) values (13,'윤신헤',1600,25,2);
+INSERT INTO Member_info (main_id, name, exp, point, point_role, choose_role) values (11,'정종인',20,5,0,0);
+INSERT INTO Member_info (main_id, name, exp, point, point_role, choose_role) values (12,'정종인',250,15,1,1);
+INSERT INTO Member_info (main_id, name, exp, point, point_role, choose_role) values (13,'윤신헤',1600,25,2,2);
 
 insert into mission (id, content, content_role) values (1,'방 청소하기',0);
 insert into mission (id, content, content_role) values (2,'밥 세끼 챙겨먹기',0);
@@ -20,6 +20,6 @@ insert into mission (id, content, content_role) values (11,'지인과 같이 운
 insert into mission (id, content, content_role) values (12,'지인과 카페가기',2);
 
 
-insert into default_mission (id, mission1, mission2) values (1,'defualt_mission1','default_mission2');
-insert into outside_mission (id, mission1, mission2) values (1,'outside_mission1','outside_mission2');
-insert into meet_mission (id, mission1, mission2) values (1,'meet_mission1','meet_mission2');
+insert into default_mission (id, mission1, mission2) values (1,'방 청소하기','설거지 하기');
+insert into outside_mission (id, mission1, mission2) values (1,'카페에서 음료수 사오기','책 한시간 읽기');
+insert into meet_mission (id, mission1, mission2) values (1,'밥 세끼 챙겨먹기','지인과 통화하기');

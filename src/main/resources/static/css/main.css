@@ -330,9 +330,27 @@ a:focus {
     padding: 10px; /* 내부 여백 추가 */
 }
 
-.slider_section .mission-box h5 {
-    margin-left: 10px; /* 오른쪽으로 이동할 여백 추가 */
-    font-weight: bold; /* 텍스트 볼드체 */
+
+.slider_section .mission-box .mission-text {
+    margin-left: 10px; 
+    font-weight: bold;
+    font-size: 20px;
+    color: #252525;
+    text-decoration: none;
+}
+
+.slider_section .mission-box .success {
+    margin-left: 20px;
+}
+
+.slider_section .mission-box .mission-text .success-text{
+    font-weight: bold;
+    font-size: 20px;
+    color: #00c6a9;
+}
+
+.mission-box.success {
+    background-color: #dfebe3; /* 연한 회색 */
 }
 
 .slider_section .daily-mission-box {

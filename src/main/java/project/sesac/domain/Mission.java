@@ -23,4 +23,5 @@ public class Mission {
         this.content = content;
         this.contentRole = contentRole;
     }
+
 }

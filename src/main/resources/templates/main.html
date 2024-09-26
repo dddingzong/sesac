@@ -119,12 +119,28 @@
               <div class="col-md-8"> <!-- 중앙 오른쪽 화면 -->
                 <div class="daily-mission-box">
                   <h3>일일 미션</h3><br>
-                  <div class="mission-box">
-                    <h5>1. <span th:text="${mission1}"></span></h5>
+                  <!-- 첫 번째 미션 -->
+                  <div th:class="${clearMission1 ? 'mission-box success' : 'mission-box'}">
+                    <form action="/mission/complete" method="post" th:if="${!clearMission1}">
+                      <input type="hidden" name="missionIndex" value="1">
+                      <button type="submit" class="btn btn-link mission-text">1. <span th:text="${mission1}"></span></button>
+                    </form>
+                    <div th:if="${clearMission1}">
+                      <span class="mission-text success">1. <span th:text="${mission1}"></span> <span class="success-text">성공!</span></span>
+                    </div>
                   </div>
+
                   <br>
-                  <div class="mission-box">
-                    <h5>2. <span th:text="${mission2}"></span></h5>
+
+                  <!-- 두 번째 미션 -->
+                  <div th:class="${clearMission2 ? 'mission-box success' : 'mission-box'}">
+                    <form action="/mission/complete" method="post" th:if="${!clearMission2}">
+                      <input type="hidden" name="missionIndex" value="2">
+                      <button type="submit" class="btn btn-link mission-text">2. <span th:text="${mission2}"></span></button>
+                    </form>
+                    <div th:if="${clearMission2}">
+                      <span class="mission-text success">2. <span th:text="${mission2}"></span> <span class="success-text">성공!</span></span>
+                    </div>
                   </div>
                 </div>
               </div>

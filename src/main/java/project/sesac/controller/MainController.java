@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.sesac.domain.*;
 import project.sesac.domain.dto.MemberInfoDto;
+
 import project.sesac.service.MemberInfoService;
 import project.sesac.service.MemberService;
 
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import project.sesac.service.MissionService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //@RestController = @Controller + @ResponseBody JSON 같은 데이터 전달
@@ -54,13 +54,17 @@ public class MainController {
         model.addAttribute("picture", "/images/"+picture+".png");
         model.addAttribute("restExp",restExp);
 
+        // 미션 상태 전달
+        model.addAttribute("clearMission1", memberInfo.isClearMission1());
+        model.addAttribute("clearMission2", memberInfo.isClearMission2());
+
         // 일일 미션 point 사용
-        int point = memberInfo.getPoint();
+        int pointRole = memberInfo.getPointRole();
 
         // 상태는 총 세가지 0: 기본미션 두개, 1: 기본미션 한개 랜덤하나, 2: 만남미션 한개 기본, 야외 중 한개
         // default:0, 기본미션, 야외미션 성공시 +1, 만남미션 성공시 +5
         // 최종 포인트 10 이상이면 야외미션 추가 (0->1), 20 이상이면 만남 미션 추가 (1->2)
-        List<String> missionList = choosemission(point);
+        List<String> missionList = memberInfoService.checkmission(pointRole);
         String mission1 = missionList.get(0);
         String mission2 = missionList.get(1);
 
@@ -77,7 +81,28 @@ public class MainController {
     }
 
     // 버튼 클릭시 로직
+    @PostMapping("/mission/complete")
+    public String completeMission(@RequestParam("missionIndex") int missionIndex, HttpSession session, Model model) {
+        Long main_id = (Long) session.getAttribute("main_id");
+        if (main_id == null) {
+            return "redirect:/login";
+        }
 
+        MemberInfo memberInfo = memberInfoService.findById(main_id).get();
+
+        // 미션 1 클릭 시
+        if (missionIndex == 1) {
+            memberInfoService.mission1ToTrue(memberInfo.getId());
+            logger.info("**********"+memberInfo.getName()+" mission1 clear*********");
+        }
+        // 미션 2 클릭 시
+        else if (missionIndex == 2) {
+            memberInfoService.mission2ToTrue(memberInfo.getId());
+            logger.info("**********"+memberInfo.getName()+" mission2 clear*********");
+        }
+
+        return "redirect:/main"; // 메인 페이지로 리다이렉트
+    }
 
 
 
@@ -175,44 +200,5 @@ public class MainController {
             return 0;
         }
     }
-
-    private List<String> dailydefaultmission() {
-        DefaultMission defaultMission = missionService.dailyDefaultMission();
-        List<String> list = new ArrayList<>();
-        list.add(defaultMission.getMission1());
-        list.add(defaultMission.getMission2());
-        return list;
-    }
-
-    private List<String> dailyoutsidemission() {
-        OutsideMission outsideMission = missionService.dailyOutsideMission();
-        List<String> list = new ArrayList<>();
-        list.add(outsideMission.getMission1());
-        list.add(outsideMission.getMission2());
-        return list;
-    }
-
-    private List<String> dailymeetmission() {
-        MeetMission meetMission = missionService.dailyMeetMission();
-        List<String> list = new ArrayList<>();
-        list.add(meetMission.getMission1());
-        list.add(meetMission.getMission2());
-        return list;
-    }
-
-
-    private List<String> choosemission(int point){
-
-        if (point < 10) {
-            return dailydefaultmission();
-        }else if (point >= 10 && point < 20){
-            return dailyoutsidemission();
-        }else if (point >= 20){
-            return dailymeetmission();
-        } else {
-            return null;
-        }
-    }
-
 
 }

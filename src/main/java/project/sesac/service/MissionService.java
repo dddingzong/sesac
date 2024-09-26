@@ -5,6 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import project.sesac.domain.DefaultMission;
 import project.sesac.domain.MeetMission;
+import project.sesac.domain.Mission;
 import project.sesac.domain.OutsideMission;
 import project.sesac.repository.DefaultMissionRepository;
 import project.sesac.repository.MeetMissionRepository;
@@ -68,6 +69,10 @@ public class MissionService {
 
     public MeetMission dailyMeetMission(){
         return meetMissionRepository.findAll().get(0);
+    }
+
+    public int checkContentRole(String content){
+        return missionRepository.findByContent(content).get(0).getContentRole();
     }
 
     // 00시마다 미션이 갱신
