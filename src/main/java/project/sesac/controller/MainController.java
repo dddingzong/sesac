@@ -6,9 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import project.sesac.domain.Member;
-import project.sesac.domain.MemberInfo;
-import project.sesac.domain.Mission;
+import project.sesac.domain.*;
 import project.sesac.domain.dto.MemberInfoDto;
 import project.sesac.service.MemberInfoService;
 import project.sesac.service.MemberService;
@@ -77,6 +75,13 @@ public class MainController {
 
         return "main";
     }
+
+    // 버튼 클릭시 로직
+
+
+
+
+
 
 
     // 로그인 시 api 가 MainController 로 들어옴
@@ -171,26 +176,39 @@ public class MainController {
         }
     }
 
-    private List<String> defaultmission() {
-        return missionService.defaultmission();
+    private List<String> dailydefaultmission() {
+        DefaultMission defaultMission = missionService.dailyDefaultMission();
+        List<String> list = new ArrayList<>();
+        list.add(defaultMission.getMission1());
+        list.add(defaultMission.getMission2());
+        return list;
     }
 
-    private List<String> outsidemission() {
-        return missionService.outsidemission();
+    private List<String> dailyoutsidemission() {
+        OutsideMission outsideMission = missionService.dailyOutsideMission();
+        List<String> list = new ArrayList<>();
+        list.add(outsideMission.getMission1());
+        list.add(outsideMission.getMission2());
+        return list;
     }
 
-    private List<String> meetmission() {
-        return missionService.meetmission();
+    private List<String> dailymeetmission() {
+        MeetMission meetMission = missionService.dailyMeetMission();
+        List<String> list = new ArrayList<>();
+        list.add(meetMission.getMission1());
+        list.add(meetMission.getMission2());
+        return list;
     }
+
 
     private List<String> choosemission(int point){
 
         if (point < 10) {
-            return defaultmission();
+            return dailydefaultmission();
         }else if (point >= 10 && point < 20){
-            return outsidemission();
+            return dailyoutsidemission();
         }else if (point >= 20){
-            return meetmission();
+            return dailymeetmission();
         } else {
             return null;
         }

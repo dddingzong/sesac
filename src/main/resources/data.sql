@@ -18,3 +18,8 @@ insert into mission (id, content, content_role) values (9,'지인 만나기',2);
 insert into mission (id, content, content_role) values (10,'지인과 통화하기',2);
 insert into mission (id, content, content_role) values (11,'지인과 같이 운동하기',2);
 insert into mission (id, content, content_role) values (12,'지인과 카페가기',2);
+
+
+insert into default_mission (id, mission1, mission2) values (1,'defualt_mission1','default_mission2');
+insert into outside_mission (id, mission1, mission2) values (1,'outside_mission1','outside_mission2');
+insert into meet_mission (id, mission1, mission2) values (1,'meet_mission1','meet_mission2');

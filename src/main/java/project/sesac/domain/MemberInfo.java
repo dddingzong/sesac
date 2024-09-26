@@ -26,6 +26,12 @@ public class MemberInfo {
 
     private int chooseRole; // 0이면 복지만 1이면 취업만 2이면 모두
 
+    @Column(columnDefinition = "boolean default false")
+    boolean clearMission1;
+
+    @Column(columnDefinition = "boolean default false")
+    boolean clearMission2;
+
     public MemberInfo(String name, int chooseRole) {
         this.name = name;
         this.chooseRole = chooseRole;
