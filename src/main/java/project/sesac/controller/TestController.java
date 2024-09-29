@@ -11,28 +11,9 @@ public class TestController {
         return "test";
     }
 
-    @GetMapping("/about")
-    public String about(){
-        return "about";
-    }
-
-    @GetMapping("/contact")
-    public String contact(){
-        return "contact";
-    }
-
-    @GetMapping("/doctor")
-    public String doctor(){
-        return "doctor";
-    }
-
     @GetMapping("/testimonial")
     public String testimonial(){
         return "testimonial";
     }
 
-    @GetMapping("/treatment")
-    public String treatment(){
-        return "treatment";
-    }
 }

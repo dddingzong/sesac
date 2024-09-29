@@ -25,7 +25,6 @@ public class MainController {
 
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
-    private final MissionService missionService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/main")
@@ -103,11 +102,6 @@ public class MainController {
 
         return "redirect:/main"; // 메인 페이지로 리다이렉트
     }
-
-
-
-
-
 
     // 로그인 시 api 가 MainController 로 들어옴
     @PostMapping(value = "/login/signin")
