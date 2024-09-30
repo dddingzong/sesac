@@ -1,5 +1,6 @@
 package project.sesac.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,7 @@ public class MissionService {
     }
 
     // 00시마다 미션이 갱신
+    @Transactional
     @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
     public void updateMission(){
 

@@ -8,14 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import project.sesac.domain.MemberInfo;
+import project.sesac.service.InformationService;
 import project.sesac.service.MemberInfoService;
 
 @Controller
 @RequiredArgsConstructor
 public class InformationController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final InformationService informationService;
     private final MemberInfoService memberInfoService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @GetMapping("/information")
     public String information(HttpSession session){
@@ -32,5 +35,10 @@ public class InformationController {
 
 
         return "/information";
+    }
+
+    @GetMapping("/information/test")
+    public void test(){
+        informationService.informationDataCrawling();
     }
 }
