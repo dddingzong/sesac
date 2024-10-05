@@ -13,7 +13,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>information</title>
+    <title>forInformation</title>
     <!-- bootstrap core css -->
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <!-- fonts style -->
@@ -100,19 +100,28 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="box">
-                        <div class="client_info">
-                            <div class="client_name">
-                                <h5>
-                                    Morijorch
-                                </h5>
-                                <h6>
-                                    Default model text
-                                </h6>
-                            </div>
-                        </div>
-                        <p>
-                            editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                        </p>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">제목</th>
+                                <th scope="col">유형</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="post : ${posts}">
+                                <td>
+                                    <a th:href="${post.url}" th:text="${post.title}"></a>
+                                </td>
+                                <td>
+                                    <span th:switch="${post.infoRole}">
+                                        <span th:case="0">복지</span>
+                                        <span th:case="1">취업</span>
+                                        <span th:case="*">기타</span>
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -141,8 +150,6 @@
 
 <!-- jQery -->
 <script src="js/jquery-3.4.1.min.js"></script>
-<!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
 <!-- nice select -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
 <!-- owl slider -->
