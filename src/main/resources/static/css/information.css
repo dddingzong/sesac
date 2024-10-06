@@ -271,12 +271,19 @@ a:focus {
 /*end header section*/
 .client_section .heading_container {
   margin-bottom: 35px;
+
 }
 
 .client_section .heading_container h2 {
   text-transform: uppercase;
+  font-size: 25px;
   margin: 0;
 }
+
+.client_section .heading_container span {
+  font-size: 35px;
+}
+
 
 .client_section .box {
   margin: 15px 45px;
@@ -293,11 +300,95 @@ a:focus {
   color: #4d4d4d; /* 다크 그레이 */
 }
 
-/* layout_padding 줄이기 */
-.client_section {
-  padding: 45px 0; /* 원래 90px에서 45px로 줄임 */
+
+.client_section .box {
+  margin-left: 15px;
 }
 
+.client_section .box table {
+  margin-bottom: 20px;
+}
+
+/* paging */
+.client_section .pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.client_section .pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #00c6a9;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+.pagination a.active {
+    font-weight: bold;
+    background-color: #009b7d;
+}
+
+
+.client_section .pagination a:hover {
+    background-color: #00937d;
+}
+
+.client_section .pagination a.active {
+    background-color: #00937d;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 80px; /* 버튼 전체 아래로 내리기 */
+}
+
+.filter-btn {
+    width: 150px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #e8faf7;
+    color: #00c6a9;
+    border: 2px solid #00c6a9;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /
+}
+
+.filter-btn:hover {
+    background-color: #00c6a9;
+    color: white;
+}
+
+.filter-btn:active {
+    background-color: #00a59f;
+}
+
+.search-container {
+    margin-bottom: 10px;
+    text-align: right;
+    margin-right: 45px;
+}
+.search-container form {
+    display: inline-block;
+}
+
+.search-container .btn {
+    background-color: #00c6a9;
+    color: white;
+    border: 2px solid #009900;
+}
+.search-container .btn:hover {
+    background-color: #009b7d;
+    border-color: #007700;
+}
 
 .client_section .carousel-control-prev,
 .client_section .carousel-control-next {

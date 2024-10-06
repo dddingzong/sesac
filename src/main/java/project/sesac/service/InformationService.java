@@ -1,5 +1,6 @@
 package project.sesac.service;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
@@ -24,6 +25,7 @@ public class InformationService {
 
     private final InformationRepository informationRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final EntityManager em;
 
     @Transactional
     public List<Information> findByInfoRole(int chooseRole){
@@ -34,6 +36,25 @@ public class InformationService {
         } else {
             return informationRepository.findAll();
         }
+    }
+
+    @Transactional
+    public List<Information> getCareInfo(){
+        return informationRepository.getCareInfo();
+    }
+
+    @Transactional
+    public List<Information> getJobInfo(){
+        return informationRepository.getJobInfo();
+    }
+
+    @Transactional
+    public List<Information> getSearchInfo(String keyword){
+        return informationRepository.getSearchInfo(keyword);
+    }
+
+    public List<Information> findAll(){
+        return informationRepository.findAll();
     }
 
     @Transactional
@@ -145,5 +166,19 @@ public class InformationService {
         } finally {
             driver.close();
         }
+    }
+
+    @Transactional
+    public List<Information> keywordFilter(List<Information> informationList, String keyword) {
+        List<Information> realList = new ArrayList<>();
+
+        System.out.println("keyword = " + keyword);
+        for (int i=0;i<informationList.size();i++) {
+            Information information = informationList.get(i);
+            if (information.getTitle().contains(keyword)){
+                realList.add(informationList.get(i));
+            }
+        }
+        return realList;
     }
 }

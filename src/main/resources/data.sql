@@ -23,3 +23,144 @@ insert into mission (id, content, content_role) values (12,'지인과 카페가�
 insert into default_mission (id, mission1, mission2) values (1,'방 청소하기','설거지 하기');
 insert into outside_mission (id, mission1, mission2) values (1,'카페에서 음료수 사오기','책 한시간 읽기');
 insert into meet_mission (id, mission1, mission2) values (1,'밥 세끼 챙겨먹기','지인과 통화하기');
+
+INSERT INTO information (id, title, url, info_role) VALUES (200,'테스트용1','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (201,'테스트용2','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (202,'테스트용3','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (203,'테스트용4','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (204,'테스트용5','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (205,'테스트용6','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (206,'테스트용7','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (207,'테스트용8','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (208,'테스트용9','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (209,'테스트용10','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (210,'테스트용11','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (211,'테스트용12','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (212,'테스트용13','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (213,'테스트용14','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (214,'테스트용15','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (215,'테스트용16','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (216,'테스트용17','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (217,'테스트용18','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (218,'테스트용19','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (219,'테스트용20','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (220,'테스트용21','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (221,'테스트용22','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (222,'테스트용23','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (223,'테스트용24','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (224,'테스트용25','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (225,'테스트용26','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (226,'테스트용27','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (227,'테스트용28','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (228,'테스트용29','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (229,'테스트용30','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (230,'테스트용31','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (231,'테스트용32','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (232,'테스트용33','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (233,'테스트용34','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (234,'테스트용35','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (235,'테스트용36','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (236,'테스트용37','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (237,'테스트용38','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (238,'테스트용39','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (239,'테스트용40','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (240,'테스트용41','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (241,'테스트용42','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (242,'테스트용43','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (243,'테스트용44','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (244,'테스트용45','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (245,'테스트용46','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (246,'테스트용47','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (247,'테스트용48','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (248,'테스트용49','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (249,'테스트용50','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (250,'테스트용51','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (251,'테스트용52','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (252,'테스트용53','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (253,'테스트용54','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (254,'테스트용55','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (255,'테스트용56','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (256,'테스트용57','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (257,'테스트용58','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (258,'테스트용59','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (259,'테스트용60','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (260,'테스트용61','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (261,'테스트용62','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (262,'테스트용63','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (263,'테스트용64','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (264,'테스트용65','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (265,'테스트용66','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (266,'테스트용67','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (267,'테스트용68','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (268,'테스트용69','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (269,'테스트용70','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (270,'테스트용71','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (271,'테스트용72','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (272,'테스트용73','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (273,'테스트용74','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (274,'테스트용75','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (275,'테스트용76','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (276,'테스트용77','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (277,'테스트용78','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (278,'테스트용79','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (279,'테스트용80','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (280,'테스트용81','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (281,'테스트용82','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (282,'테스트용83','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (283,'테스트용84','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (284,'테스트용85','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (285,'테스트용86','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (286,'테스트용87','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (287,'테스트용88','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (288,'테스트용89','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (289,'테스트용90','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (290,'테스트용91','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (291,'테스트용92','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (292,'테스트용93','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (293,'테스트용94','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (294,'테스트용95','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (295,'테스트용96','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (296,'테스트용97','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (297,'테스트용98','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (298,'테스트용99','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (299,'테스트용100','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (300,'테스트용101','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (301,'테스트용102','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (302,'테스트용103','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (303,'테스트용104','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (304,'테스트용105','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (305,'테스트용106','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (306,'테스트용107','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (307,'테스트용108','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (308,'테스트용109','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (309,'테스트용110','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (310,'테스트용111','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (311,'테스트용112','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (312,'테스트용113','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (313,'테스트용114','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (314,'테스트용115','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (315,'테스트용116','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (316,'테스트용117','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (317,'테스트용118','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (318,'테스트용119','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (319,'테스트용120','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (320,'테스트용121','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (321,'테스트용122','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (322,'테스트용123','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (323,'테스트용124','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (324,'테스트용125','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (325,'테스트용126','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (326,'테스트용127','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (327,'테스트용128','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (328,'테스트용129','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (329,'테스트용130','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (330,'테스트용131','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (331,'테스트용132','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (332,'테스트용133','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (333,'테스트용134','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (334,'테스트용135','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (335,'테스트용136','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (336,'테스트용137','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (337,'테스트용138','www.naver.com',1);
+
+
