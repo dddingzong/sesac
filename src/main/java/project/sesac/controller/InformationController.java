@@ -53,20 +53,26 @@ public class InformationController {
             // chooseRole 이 0이면 복지만 1이면 취업만 2면 모두
             // information list 가져오기
              informationList = informationService.findByInfoRole(chooseRole);
+            if (chooseRole == 2){
+                // 뒤섞는로직 (복지 취업 복지 취업 순으로)
+                informationService.shuffleLogic(informationList);
+            }
              if(keyword != null) {
                  informationList = informationService.keywordFilter(informationList, keyword);
              }
-        } else if (role != null && role == 0) { // careInformation
+        } else if (role == 0) { // careInformation
             informationList = informationService.findAll();
             if(keyword != null) {
+                // 뒤섞는로직
+                informationService.shuffleLogic(informationList);
                 informationList = informationService.keywordFilter(informationList, keyword);
             }
-        } else if (role != null && role == 1) { // careInformation
+        } else if (role == 1) { // careInformation
             informationList = informationService.getCareInfo();
             if(keyword != null) {
                 informationList = informationService.keywordFilter(informationList, keyword);
             }
-        } else if (role != null && role == 2) { // jobInformation
+        } else if (role == 2) { // jobInformation
             informationList = informationService.getJobInfo();
             if(keyword != null) {
                 informationList = informationService.keywordFilter(informationList, keyword);
@@ -89,7 +95,7 @@ public class InformationController {
         model.addAttribute("posts",posts);
         model.addAttribute("count",count); // information 의 전체 개수
         model.addAttribute("totalPages", count%10==0 ? count/10 : count/10 + 1);
-        model.addAttribute("startNumber",listNumber - listNumber%5 + 1);
+        model.addAttribute("startNumber",listNumber%5==0? listNumber-4 : listNumber - listNumber%5 + 1);
         model.addAttribute("listNumber",listNumber);
         model.addAttribute("role",role);
         model.addAttribute("keyword",keyword);
@@ -100,7 +106,7 @@ public class InformationController {
     @GetMapping("/information/test")
     public String test(){
         informationService.informationDataCrawling();
-        return "redirect:/information";
+        return "redirect:/information/1";
     }
 
 

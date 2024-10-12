@@ -61,6 +61,8 @@ public class InformationService {
     @Scheduled(cron = "0 50 23 * * *", zone = "Asia/Seoul") // 매일 11시 50분에 갱신
     public void informationDataCrawling(){
 
+        informationRepository.deleteAll();
+
         WebDriver driver; //셀리니움 사용을 위한 webDriver 주입
 
         //Chrome Options;
@@ -172,7 +174,6 @@ public class InformationService {
     public List<Information> keywordFilter(List<Information> informationList, String keyword) {
         List<Information> realList = new ArrayList<>();
 
-        System.out.println("keyword = " + keyword);
         for (int i=0;i<informationList.size();i++) {
             Information information = informationList.get(i);
             if (information.getTitle().contains(keyword)){
@@ -181,4 +182,52 @@ public class InformationService {
         }
         return realList;
     }
+
+    public void shuffleLogic(List<Information> informationList) {
+
+        ArrayList<Information> careInformationList = new ArrayList<>();
+        ArrayList<Information> jobInformationList = new ArrayList<>();
+
+        for(int i=0; i<informationList.size();i++) {
+            Information information = informationList.get(i);
+            int infoRole = information.getInfoRole();
+
+            if (infoRole==0){ // 복지
+                careInformationList.add(information);
+            } else if(infoRole==1) { // 취업
+                jobInformationList.add(information);
+            }
+        }
+
+        for (int i = informationList.size()-1; i >= 0; i--) {
+            informationList.remove(i);
+        }
+
+        int smallListSize = 0;
+        if (careInformationList.size()==jobInformationList.size()){
+            smallListSize = careInformationList.size();
+        } else {
+            smallListSize = Math.min(jobInformationList.size(), careInformationList.size());
+        }
+
+        for (int i=0; i<smallListSize; i++){
+            informationList.add(careInformationList.get(i));
+            informationList.add(jobInformationList.get(i));
+        }
+
+        if (careInformationList.size() > jobInformationList.size()){
+            for (int i = smallListSize; i<careInformationList.size();i++){
+                informationList.add(careInformationList.get(i));
+            }
+        } else {
+            for (int i = smallListSize; i<jobInformationList.size();i++){
+                informationList.add(jobInformationList.get(i));
+            }
+        }
+
+
+
+    }
+
+
 }
