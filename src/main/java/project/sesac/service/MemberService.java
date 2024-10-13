@@ -26,4 +26,9 @@ public class MemberService {
         return !memberRepository.findByLoginId(loginId).isEmpty();
     }
 
+    public String findLoginIdById(Long main_id){
+        Member member = memberRepository.findById(main_id).get();
+        return member.getLoginId();
+    }
+
 }
