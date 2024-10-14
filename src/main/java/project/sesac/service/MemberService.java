@@ -1,5 +1,7 @@
 package project.sesac.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import project.sesac.domain.Member;
@@ -12,6 +14,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final EntityManager em;
 
     public void save(Member member){
         memberRepository.save(member);
@@ -29,6 +32,19 @@ public class MemberService {
     public String findLoginIdById(Long main_id){
         Member member = memberRepository.findById(main_id).get();
         return member.getLoginId();
+    }
+
+    public Member findById(Long main_id){
+        return memberRepository.findById(main_id).get();
+    }
+
+    @Transactional
+    public void changePassword(Long main_id, String newLoginPassword){
+        Member member = memberRepository.findById(main_id).get();
+        member.changePassword(newLoginPassword);
+
+        em.flush();
+        em.clear();
     }
 
 }

@@ -76,4 +76,8 @@ public class MemberInfo {
         this.exp = this.exp + number;
     }
 
+    public void changeChooseRole(int newChooseRole){
+        this.chooseRole = newChooseRole;
+    }
+
 }

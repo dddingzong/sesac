@@ -40,4 +40,8 @@ public class AgentService {
 
     }
 
+    @Transactional
+    public List<Agent> findByLoginId(String loginId) {
+        return agentRepository.findByLoginId(loginId);
+    }
 }

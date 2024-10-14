@@ -21,4 +21,8 @@ public class Member {
         this.loginId = loginId;
         this.loginPassword = loginPassword;
     }
+
+    public void changePassword(String newLoginPassword){
+        this.loginPassword = newLoginPassword;
+    }
 }

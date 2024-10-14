@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.sesac.domain.*;
+import project.sesac.domain.dto.MemberDto;
 import project.sesac.domain.dto.MemberInfoDto;
 
+import project.sesac.domain.dto.UserUpdateDto;
 import project.sesac.service.*;
 
 import org.slf4j.Logger;
@@ -26,6 +28,7 @@ public class MainController {
     private final MemberService memberService;
     private final InformationService informationService;
     private final BoardService boardService;
+    private final AgentService agentService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/main")
@@ -168,6 +171,83 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/mypage")
+    public String mypage(HttpSession session, Model model){
+
+        Long main_id = (Long) session.getAttribute("main_id");
+        if (main_id == null) {
+            // main_id가 없으면 로그인 페이지로 redirect
+            return "redirect:/login";
+        }
+
+        MemberInfo memberInfo = memberInfoService.findById(main_id).get();
+        Member member = memberService.findById(main_id);
+
+        List<Agent> agentList = agentService.findByLoginId(member.getLoginId());
+
+        Long boardId = 0L;
+        String boardTitle = "X";
+        if (agentList.isEmpty()){ // 모임 참여 X
+
+        } else { // 모임 참여 O
+            boardId = agentList.get(0).getBoard_id();
+            boardTitle = boardService.findById(boardId).getTitle();
+        }
+
+        logger.info("**********마이페이지 진입 성공**********");
+        logger.info("사용자 이름 = " + memberInfo.getName());
+
+        // exp -> level
+        String level = changeExpToLevel(memberInfo.getExp());
+
+        // 필요한 데이터
+        // member: loginId, loginPassword
+        // memberInfo: name, exp, chooseRole
+        // Agent board_id
+        model.addAttribute("loginId",member.getLoginId());
+        model.addAttribute("loginPassword",member.getLoginPassword());
+        model.addAttribute("name",memberInfo.getName());
+        model.addAttribute("level",level);
+        model.addAttribute("chooseRole",memberInfo.getChooseRole());
+        model.addAttribute("boardId",boardId);
+        model.addAttribute("boardTitle",boardTitle);
+
+        return "mypage";
+    }
+
+    @PostMapping("/mypage/update")
+    public String updateUser(@ModelAttribute UserUpdateDto userUpdateDto, HttpSession session, Model model) {
+
+        Long main_id = (Long) session.getAttribute("main_id");
+        if (main_id == null) {
+            // main_id가 없으면 로그인 페이지로 redirect
+            return "redirect:/login";
+        }
+
+        // 기존 Password와 chooseRole
+        MemberInfo memberInfo = memberInfoService.findById(main_id).get();
+        Member member = memberService.findById(main_id);
+        String oldLoginPassword = member.getLoginPassword();
+        int oldChooseRole = memberInfo.getChooseRole();
+
+
+        // 변경 후 Password와 chooseRole
+        String newLoginPassword = userUpdateDto.getLoginPassword();
+        int newChooseRole = chooseRoleToInt(userUpdateDto.getChooseRole());
+
+        if (!oldLoginPassword.equals(newLoginPassword)){ // 다르면 수정 로직 실행
+            memberService.changePassword(main_id, newLoginPassword);
+        }
+
+        if (oldChooseRole != newChooseRole){ // 다르면 수정 로직 실행
+            memberInfoService.changeChooseRole(main_id,newChooseRole);
+        }
+
+        return "redirect:/main";
+    }
+
+
+
 
     private String changeExpToLevel(int exp) {
         if (exp < 200){
@@ -214,6 +294,19 @@ public class MainController {
             return 100;
         } else {
             return 0;
+        }
+    }
+
+    // ChooseRole 의 값을 String -> int
+    int chooseRoleToInt(String chooseRole){
+        if (chooseRole.equals("care")){
+            return 0;
+        } else if (chooseRole.equals("job")) {
+            return 1;
+        } else if (chooseRole.equals("all")){
+            return 2;
+        } else {
+            return -1;
         }
     }
 

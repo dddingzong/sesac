@@ -61,6 +61,15 @@ public class MemberInfoService {
         em.clear();
     }
 
+    @Transactional
+    public void changeChooseRole(Long main_id, int newChooseRole){
+        MemberInfo memberInfo = memberInfoRepository.findById(main_id).get();
+        memberInfo.changeChooseRole(newChooseRole);
+
+        em.flush();
+        em.clear();
+    }
+
     // 11시 50분마다 정산(안깬 미션이 있으면 마이너스, clearmission값 초기화)
     @Transactional
     @Scheduled(cron = "0 55 23 * * *", zone = "Asia/Seoul")
