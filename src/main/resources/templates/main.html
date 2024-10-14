@@ -153,9 +153,30 @@
       <div class="col">
         <form>
           <h4>
-            최근 정보통
+            최근 정보
           </h4>
-
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">제목</th>
+                <th scope="col">유형</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="list : ${list1}" data-info-role="${list.infoRole}">
+                <td>
+                  <a th:href="${list.url}" th:text="${#strings.abbreviate(list.title, 30)}" class="ellipsis"></a>
+                </td>
+                <td>
+                  <span th:switch="${list.infoRole}">
+                    <span th:case="0">복지 정보</span>
+                    <span th:case="1">취업 정보</span>
+                    <span th:case="*">기타</span>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </form>
       </div>
       <!-- 두 번째 컨테이너 추가 -->
@@ -164,7 +185,26 @@
           <h4>
             최근 게시글
           </h4>
-
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">제목</th>
+                <th scope="col">인원수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="post : ${list2}">
+                <td>
+                  <a th:href="@{/board/content/{id}(id=${post.id})}" th:text="${#strings.abbreviate(post.title, 30)}" class="ellipsis"></a>
+                </td>
+                <td>
+                  <span th:text="${post.agent}"></span>
+                  /
+                  <span th:text="${post.total}"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </form>
       </div>
     </div>

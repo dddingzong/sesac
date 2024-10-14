@@ -9,13 +9,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.sesac.domain.*;
 import project.sesac.domain.dto.MemberInfoDto;
 
-import project.sesac.service.MemberInfoService;
-import project.sesac.service.MemberService;
+import project.sesac.service.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import project.sesac.service.MissionService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //@RestController = @Controller + @ResponseBody JSON 같은 데이터 전달
@@ -25,6 +24,8 @@ public class MainController {
 
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
+    private final InformationService informationService;
+    private final BoardService boardService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/main")
@@ -70,11 +71,32 @@ public class MainController {
         model.addAttribute("mission1",mission1);
         model.addAttribute("mission2",mission2);
 
-        // todayInformation database 에서 가져오는 식
+        // Information database 에서 가져오는 식
+        int chooseRole = memberInfo.getChooseRole();
+        List<Information> infoList = informationService.findByInfoRole(chooseRole);
+        List<Information> list1 = new ArrayList<>();
+        if (chooseRole == 2){
+            // 뒤섞는로직 (복지 취업 복지 취업 순으로)
+            informationService.shuffleLogic(infoList);
+        }
+        // 첫 5개 요소를 가져오고 리스트에 추가
+        if (infoList.size() > 5) {
+            list1.addAll(infoList.subList(0, 5));
+        } else {
+            list1.addAll(infoList);
+        }
+        model.addAttribute("list1",list1);
 
+        // Board database 에서 가져오는 식
+        List<Board> boardList = boardService.findAll();
+        List<Board> list2 = new ArrayList<>();
 
-        // 모여봐요! database 에서 가져오는 식
-
+        if (boardList.size() > 5) {
+            list2.addAll(boardList.subList(0, 5));
+        } else {
+            list2.addAll(boardList);
+        }
+        model.addAttribute("list2",list2);
 
         return "main";
     }

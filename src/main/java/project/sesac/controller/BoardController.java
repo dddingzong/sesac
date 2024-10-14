@@ -53,8 +53,6 @@ public class BoardController {
             boardList = boardService.keywordFilter(boardList, keyword);
         }
 
-        // 여기부터 구현해야됨
-
         int count = boardList.size();
         List<Board> posts = new ArrayList<>();
 

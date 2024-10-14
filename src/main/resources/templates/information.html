@@ -118,7 +118,7 @@
                                     <tbody id="info-table">
                                     <tr th:each="post : ${posts}" data-info-role="${post.infoRole}">
                                         <td>
-                                            <a th:href="${post.url}" th:text="${post.title}"></a>
+                                            <a th:href="${post.url}" th:text="${#strings.abbreviate(post.title, 40)}"></a>
                                         </td>
                                         <td>
                                             <span th:switch="${post.infoRole}">

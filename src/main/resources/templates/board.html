@@ -114,7 +114,7 @@
                                     <tbody id="info-table">
                                     <tr th:each="post : ${posts}">
                                         <td>
-                                            <a th:href="@{/board/content/{id}(id=${post.id})}" th:text="${post.title}"></a>
+                                            <a th:href="@{/board/content/{id}(id=${post.id})}" th:text="${#strings.abbreviate(post.title, 40)}"></a>
                                         </td>
                                         <td>
                                             <span th:text="${post.author}"></span>

@@ -52,7 +52,7 @@ public class InformationController {
             int chooseRole = memberInfo.getChooseRole();
             // chooseRole 이 0이면 복지만 1이면 취업만 2면 모두
             // information list 가져오기
-             informationList = informationService.findByInfoRole(chooseRole);
+            informationList = informationService.findByInfoRole(chooseRole);
             if (chooseRole == 2){
                 // 뒤섞는로직 (복지 취업 복지 취업 순으로)
                 informationService.shuffleLogic(informationList);

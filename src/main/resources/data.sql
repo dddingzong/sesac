@@ -24,16 +24,16 @@ insert into default_mission (id, mission1, mission2) values (1,'방 청소하기
 insert into outside_mission (id, mission1, mission2) values (1,'카페에서 음료수 사오기','책 한시간 읽기');
 insert into meet_mission (id, mission1, mission2) values (1,'밥 세끼 챙겨먹기','지인과 통화하기');
 
-INSERT INTO information (id, title, url, info_role) VALUES (200,'테스트용1','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (200,'테스트용1 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',0);
 INSERT INTO information (id, title, url, info_role) VALUES (201,'테스트용2','www.naver.com',0);
-INSERT INTO information (id, title, url, info_role) VALUES (202,'테스트용3','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (202,'테스트용3 제목이 매우매우 길다면 어떻게 될까요 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',0);
 INSERT INTO information (id, title, url, info_role) VALUES (203,'테스트용4','www.naver.com',0);
-INSERT INTO information (id, title, url, info_role) VALUES (204,'테스트용5','www.naver.com',0);
-INSERT INTO information (id, title, url, info_role) VALUES (205,'테스트용6','www.naver.com',1);
-INSERT INTO information (id, title, url, info_role) VALUES (206,'테스트용7','www.naver.com',1);
-INSERT INTO information (id, title, url, info_role) VALUES (207,'테스트용8','www.naver.com',1);
-INSERT INTO information (id, title, url, info_role) VALUES (208,'테스트용9','www.naver.com',1);
-INSERT INTO information (id, title, url, info_role) VALUES (209,'테스트용10','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (204,'테스트용5 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',0);
+INSERT INTO information (id, title, url, info_role) VALUES (205,'테스트용6 제목이 매우매우 길다면 어떻게 될까요 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (206,'테스트용7 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (207,'테스트용8 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (208,'테스트용9 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',1);
+INSERT INTO information (id, title, url, info_role) VALUES (209,'테스트용10 제목이 매우매우 길다면 어떻게 될까요','www.naver.com',1);
 INSERT INTO information (id, title, url, info_role) VALUES (210,'테스트용11','www.naver.com',0);
 INSERT INTO information (id, title, url, info_role) VALUES (211,'테스트용12','www.naver.com',0);
 INSERT INTO information (id, title, url, info_role) VALUES (212,'테스트용13','www.naver.com',0);
@@ -144,9 +144,9 @@ INSERT INTO information (id, title, url, info_role) VALUES (336,'테스트용117
 INSERT INTO information (id, title, url, info_role) VALUES (337,'테스트용118','www.naver.com',1);
 
 
-INSERT INTO board (board_id, title, author, content, total, agent, agent_full) VALUES (100,'롤할사람','chung','롤 5인큐 구해요',5,1,'false');
+INSERT INTO board (board_id, title, author, content, total, agent, agent_full) VALUES (100,'롤할사람 제목이 매우매우 길다면 어떻게 될까요','chung','롤 5인큐 구해요',5,1,'false');
 INSERT INTO board (board_id, title, author, content, total, agent, agent_full) VALUES (101,'쿠모탑불팟','yoon','랏폿 구해요',4,1,'false');
-INSERT INTO board (board_id, title, author, content, total, agent, agent_full) VALUES (102,'책읽자','ddding','같이 책읽어요',5,1,'false');
+INSERT INTO board (board_id, title, author, content, total, agent, agent_full) VALUES (102,'책읽자 제목이 매우매우 길다면 어떻게 될까요 제목이 매우매우 길다면 어떻게 될까요','ddding','같이 책읽어요',5,1,'false');
 
 INSERT INTO agent (id, board_id, agent) VALUES (200,100,'chung');
 INSERT INTO agent (id, board_id, agent) VALUES (202,101,'yoon');
