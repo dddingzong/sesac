@@ -23,6 +23,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final LastService lastService;
     private final AgentService agentService;
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
@@ -195,7 +196,8 @@ public class BoardController {
         Board board = boardService.findById(id);
         if (board.getAgent() == board.getTotal()){
             logger.info("**********세시간 뒤에 "+id+"번 게시판 삭제**********");
-//            BoardService.lastLogic(id);
+            lastService.lastLogic(id);
+            logger.info(id + "번 게시물 lastLogic 끝");
         }
 
         return "redirect:/board/content/"+id;

@@ -72,4 +72,8 @@ public class MemberInfo {
         this.exp = this.exp + 40;
     }
 
+    public void plusExpInLastLogic(int number){
+        this.exp = this.exp + number;
+    }
+
 }
