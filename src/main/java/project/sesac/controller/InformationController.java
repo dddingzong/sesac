@@ -103,8 +103,8 @@ public class InformationController {
     }
 
 
-    @GetMapping("/information/test")
-    public String test(){
+    @GetMapping("/information/getCareAndJobInformation")
+    public String getCareAndJobInformation(){
         informationService.informationDataCrawling();
         return "redirect:/information/1";
     }

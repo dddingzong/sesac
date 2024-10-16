@@ -91,6 +91,8 @@ public class InformationService {
             logger.info("페이지 접속");
             logger.info("페이지 접속후 3초 로딩");
             Thread.sleep(3000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            driver.findElement(By.xpath("//*[@id=\"popup-dialog-104\"]/div[2]/div/div[2]/button")).click();
+            driver.findElement(By.xpath("//*[@id=\"popup-dialog-103\"]/div[2]/div/div[2]/button ")).click();
             driver.findElement(By.xpath("//*[@id=\"total-search-key\"]")).sendKeys("고립은둔청년");
             driver.findElement(By.xpath("//*[@id=\"news-search-form\"]/div/div[1]/div[1]/button")).click();
 
