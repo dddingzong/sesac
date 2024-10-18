@@ -55,7 +55,7 @@ public class MainController {
         int restExp = restExp(exp); // 1%~100% 사이
         model.addAttribute("level",level);
         String picture = levelToPicture(level);
-        model.addAttribute("picture", "/images/"+picture+".png");
+        model.addAttribute("picture", "images/"+picture+".png");
         model.addAttribute("restExp",restExp);
 
         // 미션 상태 전달
