@@ -29,6 +29,7 @@ public class MainController {
     private final InformationService informationService;
     private final BoardService boardService;
     private final AgentService agentService;
+    private final MissionService missionService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/main")
@@ -243,6 +244,18 @@ public class MainController {
             memberInfoService.changeChooseRole(main_id,newChooseRole);
         }
 
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main/memberInfoChange")
+    public String memberInfoChange(){
+        memberInfoService.memberInfoChange();
+        return "redirect:/main";
+    }
+
+    @GetMapping("/main/updateMission")
+    public String updateMission(){
+        missionService.updateMission();
         return "redirect:/main";
     }
 
