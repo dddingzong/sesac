@@ -256,7 +256,7 @@ public class MainController {
     @GetMapping("/main/updateMission")
     public String updateMission(){
         missionService.updateMission();
-        return "redirect:/main";
+        return "redirect:/";
     }
 
 

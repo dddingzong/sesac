@@ -78,7 +78,7 @@ public class InformationService {
         options = new ChromeOptions();
         options.addArguments("--headless"); // 브라우저를 열지 않고 실행하는 옵션 (필요 시 제거 가능)
         options.addArguments("--disable-gpu"); // GPU 비활성화 (헤드리스 모드에서 권장)
-        options.addArguments("--window-size=1920,1080"); // 브라우저 창 크기 설정
+//        options.addArguments("--window-size=1920,1080"); // 브라우저 창 크기 설정
 //        options.addArguments("--no-sandbox");
 
         driver = new ChromeDriver(options);
