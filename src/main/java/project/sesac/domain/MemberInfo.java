@@ -60,9 +60,14 @@ public class MemberInfo {
         this.point = this.point + number;
     }
 
-    public void minusPoint(int number){
-        this.point = this.point - number;
+    public void minusPoint(int number) {
+        if (number > point) {
+            this.point = 0;
+        } else {
+            this.point = this.point - number;
+        }
     }
+
 
     public void changePointRole(int pointRole){
         this.pointRole = pointRole;
