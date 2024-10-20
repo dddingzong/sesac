@@ -78,9 +78,6 @@ public class InformationService {
 //        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 //
 //        options = new ChromeOptions();
-//        options.addArguments("--headless"); // 브라우저를 열지 않고 실행하는 옵션 (필요 시 제거 가능)
-//        options.addArguments("--disable-gpu"); // GPU 비활성화 (헤드리스 모드에서 권장)
-//
 //        driver = new ChromeDriver(options);
 
 
@@ -112,8 +109,8 @@ public class InformationService {
             logger.info("페이지 접속");
             logger.info("페이지 접속후 10초 로딩");
             Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            driver.findElement(By.xpath("//*[@id=\"popup-dialog-103\"]/div[2]/div/div[2]/button")).click();
             driver.findElement(By.xpath("//*[@id=\"popup-dialog-104\"]/div[2]/div/div[2]/button")).click();
-            driver.findElement(By.xpath("//*[@id=\"popup-dialog-103\"]/div[2]/div/div[2]/button ")).click();
             driver.findElement(By.xpath("//*[@id=\"total-search-key\"]")).sendKeys("고립은둔청년");
             driver.findElement(By.xpath("//*[@id=\"news-search-form\"]/div/div[1]/div[1]/button")).click();
 
