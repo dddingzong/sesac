@@ -89,7 +89,7 @@ public class InformationService {
         ChromeOptions options;
 
         String WEB_DRIVER_ID = "webdriver.chrome.driver";
-        String WEB_DRIVER_PATH = "/root/chromedriver-linux64/chromedriver.exe";
+        String WEB_DRIVER_PATH = "/root/chromedriver-linux64/chromedriver";
 
         //webdriver 위치에 대한 property 설정 추가
         //(intellij 에서는 파일경로를 resources/static/부터 찾아준다)
