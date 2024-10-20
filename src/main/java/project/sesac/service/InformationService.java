@@ -65,11 +65,31 @@ public class InformationService {
 
         WebDriver driver; //셀리니움 사용을 위한 webDriver 주입
 
+
+        // Local 설정
+        //Chrome Options;
+//        ChromeOptions options;
+//
+//        String WEB_DRIVER_ID = "webdriver.chrome.driver";
+//        String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
+//
+//        //webdriver 위치에 대한 property 설정 추가
+//        //(intellij 에서는 파일경로를 resources/static/부터 찾아준다)
+//        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+//
+//        options = new ChromeOptions();
+//        options.addArguments("--headless"); // 브라우저를 열지 않고 실행하는 옵션 (필요 시 제거 가능)
+//        options.addArguments("--disable-gpu"); // GPU 비활성화 (헤드리스 모드에서 권장)
+//
+//        driver = new ChromeDriver(options);
+
+
+        // Linux 설정
         //Chrome Options;
         ChromeOptions options;
 
         String WEB_DRIVER_ID = "webdriver.chrome.driver";
-        String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
+        String WEB_DRIVER_PATH = "/root/chromedriver-linux64/chromedriver.exe";
 
         //webdriver 위치에 대한 property 설정 추가
         //(intellij 에서는 파일경로를 resources/static/부터 찾아준다)
@@ -78,10 +98,11 @@ public class InformationService {
         options = new ChromeOptions();
         options.addArguments("--headless"); // 브라우저를 열지 않고 실행하는 옵션 (필요 시 제거 가능)
         options.addArguments("--disable-gpu"); // GPU 비활성화 (헤드리스 모드에서 권장)
-//        options.addArguments("--window-size=1920,1080"); // 브라우저 창 크기 설정
-//        options.addArguments("--no-sandbox");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
         driver = new ChromeDriver(options);
+
 
         List<Information> infoList = new ArrayList<>();
 
