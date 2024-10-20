@@ -110,22 +110,22 @@ public class InformationService {
             String crawlingUrl = "https://www.bigkinds.or.kr/";
             driver.get(crawlingUrl);
             logger.info("페이지 접속");
-            logger.info("페이지 접속후 3초 로딩");
-            Thread.sleep(3000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            logger.info("페이지 접속후 10초 로딩");
+            Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
             driver.findElement(By.xpath("//*[@id=\"popup-dialog-104\"]/div[2]/div/div[2]/button")).click();
             driver.findElement(By.xpath("//*[@id=\"popup-dialog-103\"]/div[2]/div/div[2]/button ")).click();
             driver.findElement(By.xpath("//*[@id=\"total-search-key\"]")).sendKeys("고립은둔청년");
             driver.findElement(By.xpath("//*[@id=\"news-search-form\"]/div/div[1]/div[1]/button")).click();
 
             // 검색 페이지 진입
-            logger.info("페이지 접속후 3초 로딩");
-            Thread.sleep(3000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            logger.info("페이지 접속후 10초 로딩");
+            Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
 
             Select select = new Select(driver.findElement(By.xpath("//*[@id=\"select2\"]")));
             select.selectByValue("100");
 
-            logger.info("페이지 접속후 5초 로딩");
-            Thread.sleep(5000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            logger.info("페이지 접속후 10초 로딩");
+            Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
 
             int count = Integer.parseInt(driver.findElement(By.className("total-news-cnt")).getText());
             if (count > 100) {
@@ -150,14 +150,14 @@ public class InformationService {
             String crawlingUrlForJob = "https://www.saramin.co.kr/zf_user/jobs/public/list";
             driver.get(crawlingUrlForJob);
             logger.info("페이지 접속");
-            logger.info("페이지 접속후 3초 로딩");
-            Thread.sleep(3000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            logger.info("페이지 접속후 10초 로딩");
+            Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
 
             Select selectForJob = new Select(driver.findElement(By.xpath("//*[@id=\"page_count\"]")));
             selectForJob.selectByValue("100");
 
-            logger.info("페이지 접속후 3초 로딩");
-            Thread.sleep(3000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
+            logger.info("페이지 접속후 10초 로딩");
+            Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
 
             int countForJob = 100;
 
