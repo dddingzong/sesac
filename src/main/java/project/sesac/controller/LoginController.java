@@ -45,7 +45,7 @@ public class LoginController {
 
         // 정보 권한 고르지 안했을시
         if (memberDto.getChooseRole()==null){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("제공 받을 전보를 선택해 주십시요.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("제공 받을 정보를 선택해 주십시오.");
         }
 
         // 둘 다 통과 했을시에는 dto 에서 실제 Entity 로 변환

@@ -105,6 +105,7 @@ public class InformationController {
 
     @GetMapping("/information/getCareAndJobInformation")
     public String getCareAndJobInformation(){
+        logger.info("<<<<<<<<<<<데이터 크롤링 시작>>>>>>>>>>>");
         informationService.informationDataCrawling();
         return "redirect:/information/1";
     }
