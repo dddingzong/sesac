@@ -65,11 +65,8 @@ public class InformationService {
 
         WebDriver driver; //셀리니움 사용을 위한 webDriver 주입
 
-
         // Local 설정
-        //Chrome Options;
-//        ChromeOptions options;
-//
+
 //        String WEB_DRIVER_ID = "webdriver.chrome.driver";
 //        String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
 //
@@ -77,12 +74,10 @@ public class InformationService {
 //        //(intellij 에서는 파일경로를 resources/static/부터 찾아준다)
 //        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 //
-//        options = new ChromeOptions();
-//        driver = new ChromeDriver(options);
+//        driver = new ChromeDriver();
 
 
         // Linux 설정
-        //Chrome Options;
         ChromeOptions options;
 
         String WEB_DRIVER_ID = "webdriver.chrome.driver";
@@ -110,7 +105,7 @@ public class InformationService {
             logger.info("페이지 접속후 10초 로딩");
             Thread.sleep(10000);//잠시 페이지 로딩할시간이 필요(없으면 데이터 사용시 오류남)
             driver.findElement(By.xpath("//*[@id=\"popup-dialog-103\"]/div[2]/div/div[2]/button")).click();
-            driver.findElement(By.xpath("//*[@id=\"popup-dialog-104\"]/div[2]/div/div[2]/button")).click();
+            driver.findElement(By.xpath("//*[@id=\"popup-dialog-105\"]/div[2]/div/div[2]/button")).click();
             driver.findElement(By.xpath("//*[@id=\"total-search-key\"]")).sendKeys("고립은둔청년");
             driver.findElement(By.xpath("//*[@id=\"news-search-form\"]/div/div[1]/div[1]/button")).click();
 
