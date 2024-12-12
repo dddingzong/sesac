@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.sesac.domain.*;
-import project.sesac.domain.dto.MemberDto;
 import project.sesac.domain.dto.MemberInfoDto;
 
 import project.sesac.domain.dto.UserUpdateDto;
@@ -161,6 +160,9 @@ public class MainController {
         session.setAttribute("main_id",main_id);
 
         logger.info("**********로그인 성공**********");
+
+        logger.info("mission data 불러오기");
+        missionService.updateMission();
 
         return "redirect:/main";
     }
