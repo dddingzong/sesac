@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 import project.sesac.domain.Member;
 import project.sesac.domain.MemberInfo;
 import project.sesac.domain.dto.MemberDto;
@@ -14,6 +13,7 @@ import project.sesac.service.MemberService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import project.sesac.service.MissionService;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,17 +21,18 @@ public class LoginController {
 
     private final MemberService memberService;
     private final MemberInfoService memberInfoService;
+    private final MissionService missionService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
     //회원가입 시 데이터가 Controller 로 들어옴
     @ResponseBody
     @PostMapping(value = "/login/signup") // /login/signup 으로 POST 로 들어오면 로직 실행
-    public ResponseEntity<String> add(@RequestBody MemberDto memberDto){
+    public ResponseEntity<String> add(@RequestBody MemberDto memberDto) {
 
         // 아이디 중복 확인
         if (memberService.isLoginIdDuplicated(memberDto.getLoginId())) {
@@ -44,7 +45,7 @@ public class LoginController {
         }
 
         // 정보 권한 고르지 안했을시
-        if (memberDto.getChooseRole()==null){
+        if (memberDto.getChooseRole() == null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("제공 받을 정보를 선택해 주십시오.");
         }
 
@@ -70,12 +71,12 @@ public class LoginController {
     }
 
     // ChooseRole 의 값을 String -> int
-    int getChooseRoleToInt(MemberDto memberDto){
-        if (memberDto.getChooseRole().equals("care")){
+    int getChooseRoleToInt(MemberDto memberDto) {
+        if (memberDto.getChooseRole().equals("care")) {
             return 0;
         } else if (memberDto.getChooseRole().equals("job")) {
             return 1;
-        } else if (memberDto.getChooseRole().equals("all")){
+        } else if (memberDto.getChooseRole().equals("all")) {
             return 2;
         } else {
             return -1;
