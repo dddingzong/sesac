@@ -9,3 +9,14 @@
 ### 수정 예정 항목
 * 전체적인 리펙토링
 * 데이터 크롤링 두번 실행되는 버그 수정
+
+### 기술 스펙
+* JAVA version 17
+* SpringBoot version 3.2.9
+* hibernate version 6.4.10
+* H2 database (in local)
+
+
+* MySQL (in server)
+* Naver Cloud Platform (in server)
+
