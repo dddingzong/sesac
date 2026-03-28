@@ -44,4 +44,14 @@ public class AgentService {
     public List<Agent> findByLoginId(String loginId) {
         return agentRepository.findByLoginId(loginId);
     }
+
+    @Transactional
+    public boolean existsByBoardIdAndLoginId(Long boardId, String loginId) {
+        return !agentRepository.findByBoardIdAndLoginId(boardId, loginId).isEmpty();
+    }
+
+    @Transactional
+    public void deleteByBoardIdAndLoginId(Long boardId, String loginId) {
+        agentRepository.deleteByBoardIdAndLoginId(boardId, loginId);
+    }
 }

@@ -1,20 +1,5 @@
-var index = {
-    init: function () {
-        var _this = this;
-        $('#submit-btn').on('click', function () {
-            // 버튼의 텍스트를 확인
-            var buttonText = $(this).text().trim();
-
-            if (buttonText === '회원가입') {
-                _this.signup();
-            } else if (buttonText === '로그인') {
-//                console.log('에러발생')
-//                _this.signin();
-            }
-        });
-    },
-
-    signup : function () {
+window.signupFlow = {
+    submit: function () {
         var data = {
             name : $('#name').val(),
             loginId : $('#loginId').val(),
@@ -35,7 +20,5 @@ var index = {
             var errorMessage = xhr.responseText || '알 수 없는 오류가 발생했습니다.';
             alert(errorMessage);
         });
-    },
+    }
 };
-
-index.init();

@@ -9,6 +9,9 @@ import project.sesac.domain.DefaultMission;
 import project.sesac.domain.MeetMission;
 import project.sesac.domain.MemberInfo;
 import project.sesac.domain.OutsideMission;
+import project.sesac.domain.type.InformationPreference;
+import project.sesac.domain.type.MissionStage;
+import project.sesac.domain.type.MissionType;
 import project.sesac.repository.MemberInfoRepository;
 
 import java.util.ArrayList;
@@ -23,8 +26,8 @@ public class MemberInfoService {
     private final MissionService missionService;
     private final EntityManager em;
 
-    public void save(MemberInfo memberInfo){
-        memberInfoRepository.save(memberInfo);
+    public MemberInfo save(MemberInfo memberInfo){
+        return memberInfoRepository.save(memberInfo);
     }
 
     public Optional<MemberInfo> findById(Long main_id){
@@ -34,13 +37,8 @@ public class MemberInfoService {
     @Transactional
     public void mission1ToTrue(Long main_id){
         MemberInfo memberInfo = memberInfoRepository.findById(main_id).get();
-        memberInfo.mission1ToTrue();
-
-        String mission1Content = checkmission(memberInfo.getPointRole()).get(0);
-        int number = roleWeight(missionService.checkContentRole(mission1Content));
-
-        memberInfo.plusPoint(number);
-        memberInfo.plusExp();
+        String mission1Content = checkmission(memberInfo.missionStage()).get(0);
+        memberInfo.completeMission1(missionService.checkContentRole(mission1Content));
 
         em.flush();
         em.clear();
@@ -49,20 +47,15 @@ public class MemberInfoService {
     @Transactional
     public void mission2ToTrue(Long main_id){
         MemberInfo memberInfo = memberInfoRepository.findById(main_id).get();
-        memberInfo.mission2ToTrue();
-
-        String mission2Content = checkmission(memberInfo.getPointRole()).get(1);
-        int number = roleWeight(missionService.checkContentRole(mission2Content));
-
-        memberInfo.plusPoint(number);
-        memberInfo.plusExp();
+        String mission2Content = checkmission(memberInfo.missionStage()).get(1);
+        memberInfo.completeMission2(missionService.checkContentRole(mission2Content));
 
         em.flush();
         em.clear();
     }
 
     @Transactional
-    public void changeChooseRole(Long main_id, int newChooseRole){
+    public void changeChooseRole(Long main_id, InformationPreference newChooseRole){
         MemberInfo memberInfo = memberInfoRepository.findById(main_id).get();
         memberInfo.changeChooseRole(newChooseRole);
 
@@ -86,57 +79,30 @@ public class MemberInfoService {
             // 그 point 에 맞는 Mission Entity 확인
             // Mission Entity 의 mission1, mission2 추출
 
-            List<String> missionList = checkmission(memberInfo.getPointRole());
+            List<String> missionList = checkmission(memberInfo.missionStage());
             String mission1 = missionList.get(0);
             String mission2 = missionList.get(1);
 
-            if (!memberInfo.isClearMission1()){ // Mission1을 클리어하지 못한 경우
-                int number = roleWeight(missionService.checkContentRole(mission1));
-                memberInfo.minusPoint(number);
-            } else { // Mission1을 클리어한 경우
-                memberInfo.mission1ToFalse();
-            }
-
-            if (!memberInfo.isClearMission2()){ // Mission2를 클리어하지 못한 경우
-                int number = roleWeight(missionService.checkContentRole(mission2));
-                memberInfo.minusPoint(number);
-            } else { // Mission1을 클리어한 경우
-                memberInfo.mission2ToFalse();
-            }
-
-            // pointRole 변경
-            // 미션 하나만 클리어했을때 mission entity 가 변경되는 것을 방지하기 위함
-            memberInfo.changePointRole(pointToPointRole(memberInfo.getPoint()));
+            memberInfo.settleMissionDay(
+                    missionService.checkContentRole(mission1),
+                    missionService.checkContentRole(mission2)
+            );
         }
 
         em.flush();
         em.clear();
     }
 
-    private int pointToPointRole(int point){
-        if (point < 10) {
-            return 0;
-        }else if (point >= 10 && point < 20){
-            return 1;
-        }else if (point >= 20){
-            return 2;
-        } else {
-            return 0;
-        }
-
-    }
-
-
-    public List<String> checkmission(int pointRole){
-        if (pointRole == 0) {
+    public List<String> checkmission(MissionStage missionStage){
+        if (missionStage == MissionStage.DEFAULT) {
             return dailydefaultmission();
-        }else if (pointRole == 1){
+        }else if (missionStage == MissionStage.OUTSIDE){
             return dailyoutsidemission();
-        }else if (pointRole == 2){
+        }else if (missionStage == MissionStage.MEET){
             return dailymeetmission();
-        } else {
-            return null;
         }
+
+        throw new IllegalStateException("알 수 없는 미션 단계입니다: " + missionStage);
     }
 
     private List<String> dailydefaultmission() {
@@ -161,13 +127,5 @@ public class MemberInfoService {
         list.add(meetMission.getMission1());
         list.add(meetMission.getMission2());
         return list;
-    }
-
-    private int roleWeight(int role){
-        if (role == 2){
-            return 5;
-        } else {
-            return 1;
-        }
     }
 }

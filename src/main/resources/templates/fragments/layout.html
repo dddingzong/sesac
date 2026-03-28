@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="site-header" th:fragment="siteHeader(activePage)">
+    <div class="site-header__glow site-header__glow--left"></div>
+    <div class="site-header__glow site-header__glow--right"></div>
+    <div class="site-header__inner">
+        <a class="site-brand" href="/main" aria-label="SeSac 메인으로 이동">
+            <span class="site-brand__mark">
+                <img th:src="@{/images/logo.png}" alt="SeSac 로고">
+            </span>
+            <span class="site-brand__text">
+                <strong>SeSac</strong>
+                <small>고립 은둔 청년 회복 플랫폼</small>
+            </span>
+        </a>
+
+        <nav class="site-nav" aria-label="주요 메뉴">
+            <a class="site-nav__link" th:classappend="${activePage == 'main'} ? ' is-active'" href="/main">메인</a>
+            <a class="site-nav__link" th:classappend="${activePage == 'information'} ? ' is-active'" href="/information/1">알려줘요</a>
+            <a class="site-nav__link" th:classappend="${activePage == 'board'} ? ' is-active'" href="/board/1">모여봐요</a>
+            <a class="site-nav__link" th:classappend="${activePage == 'mypage'} ? ' is-active'" href="/mypage">마이페이지</a>
+        </nav>
+
+        <form class="site-logout" th:action="@{/logout}" method="get">
+            <button class="site-logout__button" type="submit">로그아웃</button>
+        </form>
+    </div>
+</header>
+
+<footer class="site-footer" th:fragment="siteFooter">
+    <div class="site-footer__inner">
+        <div>
+            <p class="site-footer__label">SeSac</p>
+            <strong class="site-footer__title">회복은 혼자 버티는 일이 아니라, 연결을 다시 만드는 일입니다.</strong>
+        </div>
+        <div class="site-footer__contact">
+            <span>문의하기</span>
+            <a href="mailto:dddingzong@naver.com">dddingzong@naver.com</a>
+        </div>
+    </div>
+</footer>
+
+<th:block th:fragment="alertMessage(message)">
+    <script th:if="${message}" th:inline="javascript">
+        const message = /*[[${message}]]*/ '';
+        if (message) {
+            window.alert(message);
+        }
+    </script>
+</th:block>
+</body>
+</html>

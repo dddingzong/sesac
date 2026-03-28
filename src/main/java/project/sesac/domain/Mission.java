@@ -1,11 +1,15 @@
 package project.sesac.domain;
 
+import jakarta.persistence.Convert;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import project.sesac.domain.converter.MissionTypeConverter;
+import project.sesac.domain.type.MissionType;
 
 @Getter
 @RequiredArgsConstructor
@@ -17,11 +21,17 @@ public class Mission {
 
     private String content;
 
-    private int contentRole; // 0이면 기본, 1이면 야외, 2이면 만남
+    @Column(name = "content_role")
+    @Convert(converter = MissionTypeConverter.class)
+    private MissionType missionType;
 
-    public Mission(String content, int contentRole) {
+    public Mission(String content, MissionType missionType) {
         this.content = content;
-        this.contentRole = contentRole;
+        this.missionType = missionType;
+    }
+
+    public int getContentRole() {
+        return missionType.code();
     }
 
 }

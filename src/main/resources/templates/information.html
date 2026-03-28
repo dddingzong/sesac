@@ -1,212 +1,143 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-
-
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Basic -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
-    <title>Information</title>
-    <!-- bootstrap core css -->
+    <title>SeSac | 알려줘요</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
-    <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <!--owl slider stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" >
-    <!-- font awesome style -->
-    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet">
-    <!-- nice select -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" rel="stylesheet" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous">
-    <!-- datepicker -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link th:href="@{/css/information.css}" rel="stylesheet">
-    <!-- responsive style -->
-    <link th:href="@{/css/responsive.css}" rel="stylesheet">
-    <link th:href="@{/css/jQuery-plugin-progressbar.css}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link th:href="@{/css/app.css}" rel="stylesheet">
 </head>
+<body class="app-body">
+<div th:replace="~{fragments/layout :: siteHeader('information')}"></div>
 
-<body class="sub_page">
+<main class="page-shell">
+    <section class="page-hero" data-reveal="1">
+        <span class="page-eyebrow">Curated Feed</span>
+        <h1 class="page-title">알려줘요</h1>
+        <p class="page-summary">
+            복지와 취업 정보를 한 곳에 정리했습니다. 검색과 필터로 필요한 흐름만 좁혀서 볼 수 있습니다.
+        </p>
+        <div class="hero-metrics">
+            <div class="metric-chip">
+                <strong th:text="${count}"></strong>
+                <span>전체 정보 수</span>
+            </div>
+            <div class="metric-chip">
+                <strong th:text="${role == 1 ? '복지' : (role == 2 ? '취업' : '전체')}"></strong>
+                <span>현재 필터</span>
+            </div>
+            <div class="metric-chip">
+                <strong th:text="${keyword == null || #strings.isEmpty(keyword) ? '전체 보기' : '검색 중'}"></strong>
+                <span>검색 상태</span>
+            </div>
+        </div>
+        <div class="hero-actions">
+            <a class="chip-link chip-link--brand" href="/information/1">추천 흐름</a>
+            <a class="chip-link" href="/information/getCareAndJobInformation">정보 새로고침</a>
+        </div>
+    </section>
 
-<div class="hero_area">
-    <!-- header section starts -->
-    <header class="header_section">
-        <div class="header_bottom">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <!-- 로고 사진 -->
-                    <a class="navbar-brand" href="/main">
-                        <img th:src="@{/images/logo.png}" alt="">
-                    </a>
-                    <!-- 위 네이게이션 바 -->
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="/main">메인페이지<span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/information/1">알려줘요</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/board/1">모여봐요</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/mypage">마이페이지</a>
-                                </li>
-                            </ul>
+    <section class="split-grid">
+        <article class="surface-card" data-reveal="2">
+            <div class="toolbar">
+                <div class="section-lead__copy">
+                    <span class="eyebrow-label">Filtered Results</span>
+                    <h2 class="surface-card__title">정보 목록</h2>
+                    <p class="surface-card__subtitle">총 <span th:text="${count}"></span>개의 항목 중 현재 조건에 맞는 흐름을 카드 형태로 보여줍니다.</p>
+                </div>
+                <form th:action="@{/information/1}" method="get" class="search-form toolbar__search">
+                    <input type="hidden" name="role" th:value="${role}" />
+                    <input type="text" name="keyword" class="text-input" placeholder="제목으로 검색" th:value="${keyword}">
+                    <button type="submit" class="action-button action-button--primary">검색</button>
+                </form>
+            </div>
+
+            <div class="feed-list">
+                <a class="feed-card feed-card--external"
+                   th:each="post : ${posts}"
+                   th:href="${post.url}"
+                   target="_blank"
+                   rel="noreferrer noopener">
+                    <div class="feed-card__meta">
+                        <div class="feed-card__meta-group">
+                            <span class="table-badge" th:classappend="${post.infoRole == 1} ? ' table-badge--job'">
+                                <span th:text="${post.infoRole == 0 ? '복지 정보' : '취업 정보'}"></span>
+                            </span>
                         </div>
-                        <div class="quote_btn-container">
-                            <form th:action="@{/logout}" method="get">
-                                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                                    로그아웃
-                                </button>
-                            </form>
-                        </div>
+                        <span class="feed-card__hint">외부 링크</span>
                     </div>
-                    <!-- 위 네이게이션 바 끝-->
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- end header section -->
-</div>
-
-<!-- information section -->
-<section class="client_section layout_padding">
-    <div class="container">
-        <div class="heading_container">
-            <h2>
-                <span>알려줘요</span>
-<!--                <form th:action="@{/information/test}" method="get">-->
-<!--                    <button type="submit">test</button>-->
-<!--                </form>-->
-            </h2>
-        </div>
-    </div>
-    <div class="container px-0">
-        <div class="row">
-            <div class="col-md-11">
-
-                <!-- 검색 기능 추가 -->
-                <div class="search-container">
-                    <form th:action="@{/information/1}" method="get" class="form-inline">
-                        <input type="hidden" name="role" th:value="${role}"/>
-                        <input type="text" name="keyword" class="form-control" placeholder="전체 검색" aria-label="Search">
-                        <button type="submit" class="btn btn-primary">검색</button>
-                    </form>
-                </div>
-
-                <div id="customCarousel2" class="carousel carousel-fade" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="box">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">제목</th>
-                                        <th scope="col">유형</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="info-table">
-                                    <tr th:each="post : ${posts}" data-info-role="${post.infoRole}">
-                                        <td>
-                                            <a th:href="${post.url}" th:text="${#strings.abbreviate(post.title, 40)}"></a>
-                                        </td>
-                                        <td>
-                                            <span th:switch="${post.infoRole}">
-                                                <span th:case="0">복지 정보</span>
-                                                <span th:case="1">취업 정보</span>
-                                                <span th:case="*">기타</span>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <h3 class="feed-card__title" th:text="${#strings.abbreviate(post.title, 72)}"></h3>
+                    <p class="feed-card__summary">
+                        필요한 정보만 빠르게 확인할 수 있도록 정리된 링크입니다. 클릭하면 원문 페이지로 이동합니다.
+                    </p>
+                    <div class="feed-card__footer">
+                        <span class="feed-card__footer-note">선택한 정보의 상세 페이지를 새 탭으로 엽니다.</span>
+                        <span class="chip-link chip-link--brand">바로 보기</span>
                     </div>
-                </div>
-            </div>
-
-            <!-- 버튼을 오른쪽에 추가 -->
-            <div class="col-md-1">
-                <div class="filter-buttons">
-                    <form  th:action="@{/information/1}" method="get">
-                        <input type="hidden" name="role" value="0">
-                        <input type="hidden" name="keyword" value="">
-                        <button class="filter-btn all_btn" id="all-btn" type="submit">모든 정보</button>
-                    </form>
-                    <form  th:action="@{/information/1}" method="get">
-                        <input type="hidden" name="role" value="1">
-                        <input type="hidden" name="keyword" value="">
-                        <button class="filter-btn care_btn" id="care-btn" type="submit">복지 정보</button>
-                    </form>
-                    <form  th:action="@{/information/1}" method="get">
-                        <input type="hidden" name="role" value="2">
-                        <input type="hidden" name="keyword" value="">
-                        <button class="filter-btn job_btn" id="job-btn" type="submit">취업 정보</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-        <!-- 페이지 번호 추가 -->
-        <!-- startNumber = 시작값, count = 전체 수, totalPage = 전체 페이지 수 -->
-        <div class="pagination">
-            <!-- 현재 페이지가 5보다 클 경우 이전 버튼 활성화 -->
-            <span>
-                <a th:if="${startNumber > 5}" th:href="@{/information/{listNumber}(listNumber=${startNumber-5}, role=${role}, keyword=${keyword})}">&laquo;</a>
-            </span>
-
-            <!-- 페이지 번호 버튼 생성 -->
-            <span th:each="page :  ${#numbers.sequence(startNumber, startNumber + 4)}">
-                <a th:href="@{/information/{listNumber}(listNumber=${page}, role=${role}, keyword=${keyword})}" th:text="${page}" th:if="${page <= totalPages}" th:class="${page == listNumber ? 'active' : ''}"></a>
-            </span>
-
-            <!-- 현재 페이지가 마지막 페이지보다 작을 경우 다음 버튼 활성화 -->
-            <span>
-                <a th:if="${startNumber+5 <= totalPages}" th:href="@{/information/{listNumber}(listNumber=${startNumber+5}, role=${role}, keyword=${keyword})}">&raquo;</a>
-            </span>
-        </div>
-    </div>
-</section>
-<!-- end information section -->
-
-
-<!-- info section -->
-<section class="info_section ">
-    <div class="container">
-        <div class="info_top">
-            <div class="info_logo">
-                <a href="/main">
-                    <img th:src="@{/images/logo.png}" alt="">
                 </a>
             </div>
-            <div class="info_form">
-                문의하기: dddingzong@naver.com
+
+            <div class="pagination-nav">
+                <a class="page-link" th:if="${startNumber > 5}" th:href="@{/information/{listNumber}(listNumber=${startNumber-5}, role=${role}, keyword=${keyword})}">&laquo;</a>
+                <th:block th:each="page : ${#numbers.sequence(startNumber, startNumber + 4)}">
+                    <a class="page-link"
+                       th:if="${page <= totalPages}"
+                       th:classappend="${page == listNumber ? ' is-active' : ''}"
+                       th:href="@{/information/{listNumber}(listNumber=${page}, role=${role}, keyword=${keyword})}"
+                       th:text="${page}"></a>
+                </th:block>
+                <a class="page-link" th:if="${startNumber + 5 <= totalPages}" th:href="@{/information/{listNumber}(listNumber=${startNumber+5}, role=${role}, keyword=${keyword})}">&raquo;</a>
             </div>
-        </div>
-    </div>
-</section>
-<!-- end info_section -->
+        </article>
 
-<!-- jQery -->
-<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-<!-- nice select -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
-<!-- owl slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<!-- datepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-<!-- custom js -->
+        <aside class="surface-card surface-card--accent filter-panel" data-reveal="3">
+            <div class="surface-card__header">
+                <div>
+                    <h2 class="surface-card__title">필터</h2>
+                    <p class="surface-card__subtitle">정보 유형을 빠르게 좁힐 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="filter-stack">
+                <form th:action="@{/information/1}" method="get" class="inline-form">
+                    <input type="hidden" name="role" value="0">
+                    <input type="hidden" name="keyword" value="">
+                    <button class="filter-button" th:classappend="${role == 0} ? ' is-active'" type="submit">모든 정보</button>
+                </form>
+                <form th:action="@{/information/1}" method="get" class="inline-form">
+                    <input type="hidden" name="role" value="1">
+                    <input type="hidden" name="keyword" value="">
+                    <button class="filter-button" th:classappend="${role == 1} ? ' is-active'" type="submit">복지 정보</button>
+                </form>
+                <form th:action="@{/information/1}" method="get" class="inline-form">
+                    <input type="hidden" name="role" value="2">
+                    <input type="hidden" name="keyword" value="">
+                    <button class="filter-button" th:classappend="${role == 2} ? ' is-active'" type="submit">취업 정보</button>
+                </form>
+            </div>
+            <p class="helper-text">
+                검색어는 현재 필터와 함께 적용됩니다. 관심 분야를 먼저 고르고 제목 검색을 이어서 쓰는 흐름이 가장 빠릅니다.
+            </p>
+            <div class="status-stack">
+                <div class="status-card">
+                    <strong th:text="${role == 1 ? '복지 정보 집중' : (role == 2 ? '취업 정보 집중' : '전체 흐름 탐색')}"></strong>
+                    <span>현재 선택한 필터를 기준으로 추천 흐름을 더 선명하게 볼 수 있습니다.</span>
+                </div>
+                <div class="status-card">
+                    <strong th:text="${keyword == null || #strings.isEmpty(keyword) ? '검색어 없음' : keyword}"></strong>
+                    <span>검색어가 있으면 필터와 함께 적용됩니다. 비워두면 전체 흐름을 탐색합니다.</span>
+                </div>
+            </div>
+        </aside>
+    </section>
+</main>
+
+<div th:replace="~{fragments/layout :: siteFooter}"></div>
+
+<script th:src="@{/js/app.js}"></script>
+<div th:replace="~{fragments/layout :: alertMessage(${errorMessage})}"></div>
 </body>
-
 </html>

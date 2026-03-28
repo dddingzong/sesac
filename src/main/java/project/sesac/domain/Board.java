@@ -40,9 +40,17 @@ public class Board {
 
     public void plusAgent(){
         this.agent += 1;
+        this.agentFull = this.agent >= this.total;
     }
 
     public void minusAgent(){
-        this.agent -= 1;
+        if (this.agent > 0) {
+            this.agent -= 1;
+        }
+        this.agentFull = this.agent >= this.total;
+    }
+
+    public boolean canJoin() {
+        return this.agent < this.total;
     }
 }

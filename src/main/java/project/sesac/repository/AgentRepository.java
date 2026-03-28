@@ -24,4 +24,13 @@ public interface AgentRepository extends JpaRepository<Agent,Long> {
     @Query("select a from Agent a where a.agent = :login_id")
     List<Agent> findByLoginId(@Param("login_id")String login_id);
 
+    @Query("select a from Agent a where a.board_id = :board_id and a.agent = :login_id")
+    List<Agent> findByBoardIdAndLoginId(@Param("board_id") Long boardId,
+                                        @Param("login_id") String loginId);
+
+    @Modifying
+    @Query("delete from Agent a where a.board_id = :board_id and a.agent = :login_id")
+    void deleteByBoardIdAndLoginId(@Param("board_id") Long boardId,
+                                   @Param("login_id") String loginId);
+
 }

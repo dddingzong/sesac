@@ -8,6 +8,7 @@ import project.sesac.domain.Member;
 import project.sesac.repository.MemberRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,8 +17,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final EntityManager em;
 
-    public void save(Member member){
-        memberRepository.save(member);
+    public Member save(Member member){
+        return memberRepository.save(member);
     }
 
     public List<Member> findByLoginId(String loginId){
@@ -36,6 +37,10 @@ public class MemberService {
 
     public Member findById(Long main_id){
         return memberRepository.findById(main_id).get();
+    }
+
+    public Optional<Member> findOptionalById(Long mainId) {
+        return memberRepository.findById(mainId);
     }
 
     @Transactional
