@@ -128,21 +128,32 @@ public class BoardController {
     }
 
     @GetMapping("/board/disconnect/{id}")
-    public String joinBoard(@PathVariable("id")Long id, HttpSession session) { // 이건 board_id 이다.
+    public String disconnectBoard(@PathVariable("id")Long id, HttpSession session, RedirectAttributes redirectAttributes) { // 이건 board_id 이다.
 
         Optional<CurrentUser> currentUser = sessionUserService.getCurrentUser(session);
         if (currentUser.isEmpty()) {
             return "redirect:/login";
         }
 
-        boardApplicationService.disconnectBoard(currentUser.get().memberId(), id);
+        ActionResult result = boardApplicationService.disconnectBoard(currentUser.get().memberId(), id);
+        if (!result.succeeded()) {
+            redirectAttributes.addFlashAttribute("errorMessage", result.message());
+        }
 
         return "redirect:/board/content/"+id;
     }
 
     @GetMapping("/board/deadline/{id}")
-    public String deadline(@PathVariable("id")Long id, RedirectAttributes redirectAttributes){
-        redirectAttributes.addFlashAttribute("errorMessage", "모임이 모두 마감되었습니다. 구성원분들은 세시간 후부터 다른 모임에 참가하거나. 만들 수 있습니다.");
+    public String deadline(@PathVariable("id")Long id,
+                           HttpSession session,
+                           RedirectAttributes redirectAttributes){
+        Optional<CurrentUser> currentUser = sessionUserService.getCurrentUser(session);
+        if (currentUser.isEmpty()) {
+            return "redirect:/login";
+        }
+
+        ActionResult result = boardApplicationService.deadlineBoard(currentUser.get().memberId(), id);
+        redirectAttributes.addFlashAttribute("errorMessage", result.message());
         return "redirect:/board/content/"+id;
     }
 

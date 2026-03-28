@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @Getter
 @RequiredArgsConstructor
 @Entity
@@ -29,6 +27,9 @@ public class Board {
 
     private boolean agentFull; // 다 찼으면 true 다 안찼으면 false (default = false)
 
+    @Column(columnDefinition = "boolean default false")
+    private boolean deadlineScheduled;
+
     public Board(String author, String title, String content, int total, int agent, boolean agentFull) {
         this.author = author;
         this.title = title;
@@ -36,6 +37,7 @@ public class Board {
         this.total = total;
         this.agent = agent;
         this.agentFull = agentFull;
+        this.deadlineScheduled = false;
     }
 
     public void plusAgent(){
@@ -51,6 +53,31 @@ public class Board {
     }
 
     public boolean canJoin() {
-        return this.agent < this.total;
+        return !deadlineScheduled && this.agent < this.total;
+    }
+
+    public void scheduleDeadline() {
+        this.agentFull = true;
+        this.deadlineScheduled = true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isAgentFull() {
+        return agentFull;
+    }
+
+    public boolean isDeadlineScheduled() {
+        return deadlineScheduled;
     }
 }

@@ -69,6 +69,9 @@ public class BoardApplicationService {
         if (!board.getAuthor().equals(loginId)) {
             return ActionResult.failure("작성자만 게시글을 삭제할 수 있습니다.");
         }
+        if (board.isDeadlineScheduled()) {
+            return ActionResult.failure("이미 마감된 모임은 삭제할 수 없습니다.");
+        }
 
         boardService.deleteById(boardId);
         agentService.deleteAllByBoardId(boardId);
@@ -94,7 +97,8 @@ public class BoardApplicationService {
         boardService.plusAgent(boardId);
 
         Board updatedBoard = boardService.findById(boardId);
-        if (updatedBoard.isAgentFull()) {
+        if (updatedBoard.isAgentFull() && !updatedBoard.isDeadlineScheduled()) {
+            boardService.scheduleDeadline(boardId);
             lastService.lastLogic(boardId);
         }
 
@@ -103,6 +107,10 @@ public class BoardApplicationService {
 
     public ActionResult disconnectBoard(Long memberId, Long boardId) {
         String loginId = memberService.findLoginIdById(memberId);
+        Board board = boardService.findById(boardId);
+        if (board.isDeadlineScheduled()) {
+            return ActionResult.failure("이미 마감된 모임에서는 나갈 수 없습니다.");
+        }
         if (!agentService.existsByBoardIdAndLoginId(boardId, loginId)) {
             return ActionResult.failure("참가 중인 모임이 아닙니다.");
         }
@@ -110,5 +118,21 @@ public class BoardApplicationService {
         agentService.deleteByBoardIdAndLoginId(boardId, loginId);
         boardService.minusAgent(boardId);
         return ActionResult.success();
+    }
+
+    public ActionResult deadlineBoard(Long memberId, Long boardId) {
+        String loginId = memberService.findLoginIdById(memberId);
+        Board board = boardService.findById(boardId);
+
+        if (!board.getAuthor().equals(loginId)) {
+            return ActionResult.failure("작성자만 모임을 마감할 수 있습니다.");
+        }
+        if (board.isDeadlineScheduled()) {
+            return ActionResult.failure("이미 마감 처리된 모임입니다.");
+        }
+
+        boardService.scheduleDeadline(boardId);
+        lastService.lastLogic(boardId);
+        return new ActionResult(true, "모임 마감을 완료했습니다. 세 시간 후 정산이 진행됩니다.");
     }
 }

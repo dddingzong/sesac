@@ -68,4 +68,13 @@ public class BoardService {
         em.flush();
         em.clear();
     }
+
+    @Transactional
+    public void scheduleDeadline(Long id) {
+        Board board = boardRepository.findById(id).get();
+        board.scheduleDeadline();
+
+        em.flush();
+        em.clear();
+    }
 }
