@@ -9,6 +9,7 @@ import project.sesac.domain.Information;
 import project.sesac.domain.MemberInfo;
 import project.sesac.domain.type.InformationPreference;
 import project.sesac.service.InformationService;
+import project.sesac.service.InformationSyncService;
 import project.sesac.service.MemberInfoService;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 public class InformationApplicationService {
 
     private final InformationService informationService;
+    private final InformationSyncService informationSyncService;
     private final MemberInfoService memberInfoService;
 
     public InformationPageView getInformationPage(Long memberId, int pageNumber, Integer role, String keyword) {
@@ -35,7 +37,7 @@ public class InformationApplicationService {
     }
 
     public ActionResult refreshInformation() {
-        int refreshedCount = informationService.informationDataCrawling();
+        int refreshedCount = informationSyncService.refreshInformation();
         if (refreshedCount == 0) {
             return ActionResult.failure("정보를 새로고침하지 못했습니다. 기존 데이터를 유지합니다.");
         }

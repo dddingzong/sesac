@@ -81,7 +81,6 @@ public class MainApplicationService {
 
         return new MyPageView(
                 member.getLoginId(),
-                member.getLoginPassword(),
                 memberInfo.getName(),
                 memberInfo.currentLevel().label(),
                 memberInfo.preferredInformation().code(),
@@ -95,7 +94,9 @@ public class MainApplicationService {
                 .orElseThrow(() -> new IllegalArgumentException("사용자 정보를 찾을 수 없습니다."));
         Member member = memberService.findById(memberId);
 
-        if (!member.getLoginPassword().equals(userUpdateDto.getLoginPassword())) {
+        if (userUpdateDto.getLoginPassword() != null
+                && !userUpdateDto.getLoginPassword().isBlank()
+                && !member.getLoginPassword().equals(userUpdateDto.getLoginPassword())) {
             memberService.changePassword(memberId, userUpdateDto.getLoginPassword());
         }
 

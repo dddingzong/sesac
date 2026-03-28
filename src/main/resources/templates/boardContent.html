@@ -47,23 +47,22 @@
             <div class="page-actions page-actions--spaced">
                 <a th:href="@{/board/delete/{id}(id=${board.id})}"
                    class="action-button action-button--danger"
-                   th:if="${(loginId == board.author) && (board.agent != board.total)}">삭제</a>
+                   th:if="${(loginId == board.author) && !board.deadlineScheduled}">삭제</a>
 
                 <a th:href="@{/board/deadline/{id}(id=${board.id})}"
                    class="action-button action-button--secondary"
-                   th:if="${(loginId == board.author) && (board.agent == board.total)}">모집 마감</a>
+                   th:if="${(loginId == board.author) && !board.deadlineScheduled}">모집 마감하기</a>
 
                 <a th:href="@{/board/join/{id}(id=${board.id})}"
                    class="action-button action-button--primary"
-                   th:if="${(loginId != board.author) && !#lists.contains(checkDuplicateAgentList, loginId) && (board.agent != board.total)}">참여하기</a>
+                   th:if="${(loginId != board.author) && !#lists.contains(checkDuplicateAgentList, loginId) && !board.agentFull}">참여하기</a>
 
                 <a th:href="@{/board/disconnect/{id}(id=${board.id})}"
                    class="action-button"
-                   th:if="${(loginId != board.author) && #lists.contains(checkDuplicateAgentList, loginId) && (board.agent != board.total)}">모임 나가기</a>
+                   th:if="${(loginId != board.author) && #lists.contains(checkDuplicateAgentList, loginId) && !board.agentFull}">모임 나가기</a>
 
-                <a th:href="@{/board/deadline/{id}(id=${board.id})}"
-                   class="action-button action-button--secondary"
-                   th:if="${(loginId != board.author) && (board.agent == board.total)}">모집 마감</a>
+                <span class="table-badge"
+                      th:if="${board.deadlineScheduled}">마감 예약됨</span>
 
                 <a href="/board/1" class="action-button">목록으로 돌아가기</a>
             </div>

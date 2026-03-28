@@ -2,9 +2,11 @@ package project.sesac.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.sesac.application.auth.AuthApplicationService;
 import project.sesac.application.auth.AuthResult;
@@ -97,7 +99,6 @@ public class MainController {
 
         MyPageView view = mainApplicationService.getMyPage(currentUser.get().memberId());
         model.addAttribute("loginId", view.loginId());
-        model.addAttribute("loginPassword", view.loginPassword());
         model.addAttribute("name", view.name());
         model.addAttribute("level", view.level());
         model.addAttribute("chooseRole", view.chooseRole());
@@ -120,16 +121,25 @@ public class MainController {
         return "redirect:/main";
     }
 
-    @GetMapping("/main/memberInfoChange")
-    public String memberInfoChange(){
+    @PostMapping("/main/memberInfoChange")
+    public String memberInfoChange(@RequestParam("token") String token){
+        validateMaintenanceToken(token);
         memberInfoService.memberInfoChange();
         return "redirect:/main";
     }
 
-    @GetMapping("/main/updateMission")
-    public String updateMission(){
+    @PostMapping("/main/updateMission")
+    public String updateMission(@RequestParam("token") String token){
+        validateMaintenanceToken(token);
         missionService.updateMission();
         return "redirect:/";
+    }
+
+    private void validateMaintenanceToken(String token) {
+        String expectedToken = System.getenv("SESAC_ADMIN_TOKEN");
+        if (expectedToken == null || expectedToken.isBlank() || !expectedToken.equals(token)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
